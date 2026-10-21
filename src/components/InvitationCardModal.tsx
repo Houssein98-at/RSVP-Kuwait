@@ -1,7 +1,7 @@
 import React, { useEffect, useRef, useState } from 'react';
 import QRCode from 'qrcode';
 import type { Guest, Invitation } from '../types';
-import { EVENT_DETAILS, MEETHUB_BRAND } from '../utils/constants';
+import { EVENT_DETAILS, MEETHUB_BRAND, PRODUCTION_HOSTING_URL } from '../utils/constants';
 import { useLanguage } from '../contexts/LanguageContext';
 import { buildWhatsAppMessage } from '../utils/helpers';
 import { Download, Share2, MessageCircle, Copy, Check, X, ShieldAlert, Sparkles, RotateCcw } from 'lucide-react';
@@ -51,12 +51,17 @@ export const InvitationCardModal: React.FC<InvitationCardModalProps> = ({
   const [isRevoking, setIsRevoking] = useState(false);
   const [isResetModalOpen, setIsResetModalOpen] = useState(false);
 
-  // Generate invitation public link (for phone camera scan or share)
+  // Generate invitation public link pointing to canonical Firebase Hosting domain
   const invitationToken = currentGuest.activeToken || invitation?.token || '';
-  const currentOrigin = typeof window !== 'undefined' ? window.location.origin : '';
-  const currentPath = typeof window !== 'undefined' ? window.location.pathname : '';
-  const normalizedPath = currentPath.endsWith('/') ? currentPath : `${currentPath}/`;
-  const invitationUrl = `${currentOrigin}${normalizedPath}#/invitation/${invitationToken}`;
+  const isLocalOrTest =
+    typeof window !== 'undefined' &&
+    (window.location.hostname === 'localhost' ||
+      window.location.hostname === '127.0.0.1' ||
+      window.location.hostname.includes('github.io'));
+  const baseOrigin = isLocalOrTest
+    ? PRODUCTION_HOSTING_URL
+    : (typeof window !== 'undefined' ? window.location.origin : PRODUCTION_HOSTING_URL);
+  const invitationUrl = `${baseOrigin}/#/invitation/${invitationToken}`;
 
   // Generate QR Code data URL with Dark Charcoal on solid Warm White for 100% scannability
   useEffect(() => {

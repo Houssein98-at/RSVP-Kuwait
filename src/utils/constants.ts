@@ -22,6 +22,8 @@ export const EVENT_DETAILS: EventDetails = {
   phoneCountryCode: '+965',
 };
 
+export const PRODUCTION_HOSTING_URL = 'https://rsvp-kuwait-2026.web.app';
+
 export const MEETHUB_BRAND = {
   name: 'MeetHub',
   tagline: 'BUILD. LAUNCH. GROW.',
