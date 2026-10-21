@@ -1,0 +1,50 @@
+rules_version = '2';
+service cloud.firestore {
+  match /databases/{database}/documents {
+
+    // Helper: Check if caller is an allowlisted active administrator
+    function isAdmin() {
+      return request.auth != null &&
+        exists(/databases/$(database)/documents/admins/$(request.auth.uid)) &&
+        get(/databases/$(database)/documents/admins/$(request.auth.uid)).data.role == 'admin' &&
+        get(/databases/$(database)/documents/admins/$(request.auth.uid)).data.active == true;
+    }
+
+    // Admins Collection:
+    // Authenticated users can check their own admin status
+    // All creation, updates, and deletes strictly require existing allowlisted admin permissions.
+    // ZERO public/client bootstrap loophole exists.
+    match /admins/{adminUid} {
+      allow read: if request.auth != null;
+      allow write: if isAdmin();
+    }
+
+    // Guests Collection:
+    // STRICTLY ADMIN-ONLY for read, create, update, delete
+    // Public visitors cannot query, view, or modify guest records or phone numbers.
+    match /guests/{guestId} {
+      allow read, write: if isAdmin();
+    }
+
+    // Invitations Collection:
+    // Read: Allowed so guests can view their read-only digital pass via token
+    // Write: STRICTLY ADMIN-ONLY! No public user can ever consume, check-in, or modify an invitation!
+    match /invitations/{invitationId} {
+      allow read: if true;
+      allow write: if isAdmin();
+    }
+
+    // Audit Logs Collection:
+    // Tamper-proof append-only log: Admins can read & create; updates and deletes are permanently forbidden!
+    match /auditLogs/{logId} {
+      allow read, create: if isAdmin();
+      allow update, delete: if false;
+    }
+
+    // Events Collection:
+    match /events/{eventId} {
+      allow read: if true;
+      allow write: if isAdmin();
+    }
+  }
+}

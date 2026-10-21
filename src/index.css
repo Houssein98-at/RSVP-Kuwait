@@ -1,0 +1,130 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    /* New Luxurious Arabic عقد قران Color Palette */
+    --color-burgundy: #6B2337;
+    --color-burgundy-light: #832B43;
+    --color-burgundy-dark: #431422;
+    --color-beige: #EDE1CF;
+    --color-beige-light: #F5EFE5;
+    --color-beige-dark: #DFCBB2;
+    --color-olive: #667044;
+    --color-olive-light: #78844F;
+    --color-olive-dark: #505835;
+    --color-warm-white: #FAF8F4;
+    --color-charcoal: #252522;
+    --color-charcoal-muted: #52524C;
+
+    /* Centralized theme aliases for compatibility */
+    --gold-primary: #6B2337;
+    --gold-light: #832B43;
+    --gold-dark: #431422;
+    --bg-ivory: #EDE1CF;
+    --card-ivory: #FAF8F4;
+    --text-charcoal: #252522;
+  }
+
+  html {
+    scroll-behavior: smooth;
+    -webkit-tap-highlight-color: transparent;
+  }
+
+  body {
+    font-family: 'Cairo', 'Tajawal', sans-serif;
+    background-color: var(--color-beige);
+    color: var(--color-charcoal);
+  }
+}
+
+/* Custom luxury gradients and decorations */
+.burgundy-gradient-text,
+.gold-gradient-text {
+  background: linear-gradient(135deg, #431422 0%, #6B2337 40%, #832B43 65%, #667044 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.burgundy-gradient-bg,
+.gold-gradient-bg {
+  background: linear-gradient(135deg, #6B2337 0%, #832B43 50%, #431422 100%);
+}
+
+.olive-gradient-bg {
+  background: linear-gradient(135deg, #667044 0%, #78844F 50%, #505835 100%);
+}
+
+.burgundy-border-gradient,
+.gold-border-gradient {
+  border-image: linear-gradient(135deg, #6B2337, #EDE1CF, #667044) 1;
+}
+
+.luxury-card {
+  background: #FAF8F4;
+  border: 1px solid rgba(107, 35, 55, 0.16);
+  box-shadow: 0 4px 20px -2px rgba(37, 37, 34, 0.04), 0 0 0 1px rgba(223, 203, 178, 0.55);
+}
+
+.luxury-card-dark {
+  background: #252522;
+  border: 1px solid rgba(107, 35, 55, 0.35);
+  box-shadow: 0 10px 30px -5px rgba(0, 0, 0, 0.5);
+}
+
+/* Arabesque subtle pattern background on beige */
+.bg-arabesque-subtle {
+  background-color: #EDE1CF;
+  background-image: radial-gradient(rgba(107, 35, 55, 0.07) 1px, transparent 1px), radial-gradient(rgba(102, 112, 68, 0.06) 1px, #EDE1CF 1px);
+  background-size: 28px 28px;
+  background-position: 0 0, 14px 14px;
+}
+
+/* Scanner viewfinder animations */
+@keyframes laserSweep {
+  0% {
+    top: 5%;
+    opacity: 0.85;
+  }
+  50% {
+    top: 90%;
+    opacity: 1;
+  }
+  100% {
+    top: 5%;
+    opacity: 0.85;
+  }
+}
+
+.scanner-laser-line {
+  position: absolute;
+  left: 5%;
+  right: 5%;
+  height: 2px;
+  background: linear-gradient(90deg, transparent, #6B2337, #FAF8F4, #6B2337, transparent);
+  box-shadow: 0 0 12px 2px rgba(107, 35, 55, 0.7);
+  animation: laserSweep 2.2s ease-in-out infinite;
+}
+
+/* Hide html5-qrcode built-in cluttered controls and keep clean custom controls */
+#qr-reader {
+  border: none !important;
+  border-radius: 1rem;
+  overflow: hidden;
+}
+
+#qr-reader video {
+  width: 100% !important;
+  height: 100% !important;
+  object-fit: cover !important;
+  border-radius: 1rem;
+}
+
+#qr-reader__scan_region {
+  background: transparent !important;
+}
+
+#qr-reader__dashboard {
+  padding: 0.5rem 0 !important;
+}

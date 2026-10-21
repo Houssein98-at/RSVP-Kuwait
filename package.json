@@ -1,0 +1,41 @@
+{
+  "name": "rsvp-kuwait",
+  "private": true,
+  "version": "0.0.0",
+  "type": "module",
+  "scripts": {
+    "dev": "vite",
+    "build": "tsc -b && vite build",
+    "lint": "oxlint",
+    "preview": "vite preview",
+    "test": "node scripts/run-test-suite.mjs",
+    "test:emulators": "JAVA_HOME=/usr/local/opt/openjdk/libexec/openjdk.jdk/Contents/Home PATH=\"/usr/local/opt/openjdk/bin:$PATH\" npx -y firebase-tools@latest emulators:exec --only firestore,auth \"node scripts/run-test-suite.mjs\"",
+    "setup:admin": "node scripts/setup-admin.mjs",
+    "import:guests": "node scripts/import-guests.mjs"
+  },
+  "dependencies": {
+    "canvas-confetti": "^1.9.4",
+    "firebase": "^13.0.0",
+    "firebase-admin": "^13.10.0",
+    "html5-qrcode": "^2.3.8",
+    "lucide-react": "^1.60.0",
+    "qrcode": "^1.5.4",
+    "react": "^19.3.1",
+    "react-dom": "^19.3.1",
+    "react-router-dom": "^7.18.4"
+  },
+  "devDependencies": {
+    "@types/canvas-confetti": "^1.9.0",
+    "@types/node": "^24.19.2",
+    "@types/qrcode": "^1.5.6",
+    "@types/react": "^19.3.0",
+    "@types/react-dom": "^19.3.0",
+    "@vitejs/plugin-react": "^6.1.2",
+    "autoprefixer": "^10.6.1",
+    "oxlint": "^1.88.0",
+    "postcss": "^8.5.31",
+    "tailwindcss": "^3.4.19",
+    "typescript": "~6.0.3",
+    "vite": "^8.3.4"
+  }
+}

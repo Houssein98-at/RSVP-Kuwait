@@ -1,0 +1,45 @@
+# Logs
+logs
+*.log
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+pnpm-debug.log*
+lerna-debug.log*
+
+# Dependencies and Builds
+node_modules
+dist
+dist-ssr
+*.local
+
+# Environment variables & secrets (NEVER commit these)
+.env
+.env.local
+.env.*.local
+.env.production
+serviceAccountKey.json
+service-account.json
+*.pem
+*.key
+accounts.json
+
+# Sensitive guest data, private CSVs, tokens & test invitation exports (CRITICAL)
+*.csv
+sample_guests_65.csv
+guests_private*.csv
+imported_guests*.csv
+invitation_downloaded*.png
+invitation_*.png
+*.png.download
+
+# Editor & OS files
+.vscode/*
+!.vscode/extensions.json
+.idea
+.DS_Store
+*.suo
+*.ntvs*
+*.njsproj
+*.sln
+*.sw?
