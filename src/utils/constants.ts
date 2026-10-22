@@ -91,7 +91,7 @@ export const TRANSLATIONS = {
     // Guest Management
     addNewGuest: 'إضافة ضيف جديد',
     bulkImport: 'استيراد جماعي (CSV)',
-    guestNameLabel: 'اسم الضيف الكريم / الكريمة',
+    guestNameLabel: 'اسم الضيفة الكريمة',
     guestNamePlaceholder: 'أدخل الاسم الثلاثي أو اللقب التكريمي',
     phoneLabel: 'رقم الهاتف (اختياري — الكويت)',
     phonePlaceholder: '8 أرقام (مثال: 99123456)',
@@ -150,7 +150,7 @@ export const TRANSLATIONS = {
     yesProceed: 'نعم، تابع',
     
     // Invitation Card
-    cardHonor: 'يتشرفون بدعوة الكريم / الكريمة لحضور حفل عقد قران',
+    cardHonor: 'تشرفون بدعوة الكريمة:',
     cardNotice: 'يرجى إبراز رمز الدعوة عند الدخول',
     cardPersonal: 'الدعوة شخصية ولا يجوز تحويلها',
     

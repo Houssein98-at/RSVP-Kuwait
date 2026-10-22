@@ -81,8 +81,18 @@ export const PublicInvitationPage: React.FC = () => {
 
             <div className="w-16 h-0.5 bg-gradient-to-r from-transparent via-burgundy-500 to-transparent mx-auto mb-3" />
 
-            <span className="text-xs text-olive-700 font-semibold uppercase tracking-wider block">
-              {EVENT_DETAILS.titleAr}
+            {/* Guest Name Honor Box */}
+            <div className="my-3 p-3 bg-warmwhite border border-burgundy-300/70 rounded-xl shadow-xs" dir="rtl">
+              <span className="text-[12px] text-olive-800 block font-medium">
+                تشرفون بدعوة الكريمة:
+              </span>
+              <span className="text-xl font-bold font-arabic text-burgundy-900 block mt-1">
+                {loading ? '...' : guestName || 'الكريمة'}
+              </span>
+            </div>
+
+            <span className="text-xs text-olive-700 font-semibold block mt-3">
+              لحضور حفل عقد قران:
             </span>
 
             <h1 className="text-2xl sm:text-3xl font-bold font-arabic text-burgundy-950 mt-1 mb-2">
@@ -103,16 +113,6 @@ export const PublicInvitationPage: React.FC = () => {
                 <MapPin className="w-3.5 h-3.5 text-olive-600" />
                 <span>{EVENT_DETAILS.venueAr} — {EVENT_DETAILS.hotelAr}، الكويت</span>
               </div>
-            </div>
-
-            {/* Guest Name Honor Box */}
-            <div className="my-4 p-3 bg-warmwhite border border-burgundy-300/70 rounded-xl shadow-xs">
-              <span className="text-[11px] text-olive-800 block font-medium">
-                يتشرفون بدعوة الكريم / الكريمة:
-              </span>
-              <span className="text-lg font-bold font-arabic text-burgundy-900 block mt-0.5">
-                {loading ? '...' : guestName || 'ضيفنا الكريم'}
-              </span>
             </div>
 
             {/* QR Pass */}

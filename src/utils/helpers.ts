@@ -228,7 +228,7 @@ export function buildWhatsAppMessage(
 ): string {
   const message = `بِسْمِ اللَّهِ الرَّحْمَٰنِ الرَّحِيمِ
 
-يتشرفون بدعوة الكريم / الكريمة:
+تشرفون بدعوة الكريمة:
 *${guestName}*
 
 لحضور حفل عقد قران:

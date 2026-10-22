@@ -227,53 +227,15 @@ export const InvitationCardModal: React.FC<InvitationCardModalProps> = ({
     ctx.fill();
     ctx.restore();
 
-    // 4. Event Title in Olive Green
+    // 4. Guest Honorific Banner & Name Box
     ctx.fillStyle = PALETTE.olive;
-    ctx.font = '600 36px Amiri, Cairo, sans-serif';
-    ctx.fillText('حفل عقد قران', 540, 245);
-
-    // 5. Couple Names in Majestic Burgundy
-    ctx.fillStyle = PALETTE.burgundy;
-    ctx.font = 'bold 68px Amiri, Playfair Display, serif';
-    ctx.fillText('ساره وعبدالله', 540, 335);
-
-    // 6. Date & Time
-    ctx.fillStyle = PALETTE.charcoal;
-    ctx.font = 'bold 30px Cairo, Tajawal, sans-serif';
-    ctx.fillText('الثلاثاء ٢٩ ديسمبر ٢٠٢٦', 540, 415);
-
-    ctx.fillStyle = PALETTE.burgundy;
-    ctx.font = '600 26px Cairo, Tajawal, sans-serif';
-    ctx.fillText('الساعة 7:30 مساءً', 540, 460);
-
-    // 7. Venue (Arabic in Olive & English in Dark Charcoal)
-    ctx.fillStyle = PALETTE.olive;
-    ctx.font = '600 28px Cairo, sans-serif';
-    ctx.fillText('النرجس — فندق والدورف أستوريا، الكويت', 540, 520);
-
-    ctx.fillStyle = PALETTE.charcoalMuted;
-    ctx.font = 'bold 20px Outfit, sans-serif';
-    ctx.direction = 'ltr';
-    ctx.fillText('AL NARJIS — WALDORF ASTORIA, KUWAIT', 540, 555);
-    ctx.direction = 'rtl';
-
-    // Thin separator line
-    ctx.strokeStyle = 'rgba(102, 112, 68, 0.45)';
-    ctx.lineWidth = 1.2;
-    ctx.beginPath();
-    ctx.moveTo(260, 600);
-    ctx.lineTo(820, 600);
-    ctx.stroke();
-
-    // 8. Guest Honorific Banner & Name Box
-    ctx.fillStyle = PALETTE.olive;
-    ctx.font = '500 24px Cairo, sans-serif';
-    ctx.fillText('يتشرفون بدعوة الكريم / الكريمة لحضور الحفل:', 540, 660);
+    ctx.font = '500 28px Cairo, sans-serif';
+    ctx.fillText('تشرفون بدعوة الكريمة:', 540, 235);
 
     // Guest Name in elegant luxury box
-    const guestBoxWidth = 800;
+    const guestBoxWidth = 840;
     const guestBoxX = (1080 - guestBoxWidth) / 2;
-    const guestBoxY = 690;
+    const guestBoxY = 260;
     const guestBoxHeight = 92;
 
     // Fill Warm White background
@@ -299,8 +261,46 @@ export const InvitationCardModal: React.FC<InvitationCardModalProps> = ({
 
     // Guest Name
     ctx.fillStyle = PALETTE.burgundy;
-    ctx.font = 'bold 40px Amiri, Cairo, serif';
-    ctx.fillText(guest.guestName, 540, 752);
+    ctx.font = 'bold 42px Amiri, Cairo, serif';
+    ctx.fillText(guest.guestName, 540, 322);
+
+    // 5. Ceremony Header in Olive Green
+    ctx.fillStyle = PALETTE.olive;
+    ctx.font = '600 32px Amiri, Cairo, sans-serif';
+    ctx.fillText('لحضور حفل عقد قران:', 540, 405);
+
+    // 6. Couple Names in Majestic Burgundy
+    ctx.fillStyle = PALETTE.burgundy;
+    ctx.font = 'bold 66px Amiri, Playfair Display, serif';
+    ctx.fillText('ساره وعبدالله', 540, 485);
+
+    // 7. Date & Time
+    ctx.fillStyle = PALETTE.charcoal;
+    ctx.font = 'bold 28px Cairo, Tajawal, sans-serif';
+    ctx.fillText('الثلاثاء ٢٩ ديسمبر ٢٠٢٦', 540, 555);
+
+    ctx.fillStyle = PALETTE.burgundy;
+    ctx.font = '600 24px Cairo, Tajawal, sans-serif';
+    ctx.fillText('الساعة 7:30 مساءً', 540, 595);
+
+    // 8. Venue (Arabic in Olive & English in Dark Charcoal)
+    ctx.fillStyle = PALETTE.olive;
+    ctx.font = '600 26px Cairo, sans-serif';
+    ctx.fillText('النرجس — فندق والدورف أستوريا، الكويت', 540, 650);
+
+    ctx.fillStyle = PALETTE.charcoalMuted;
+    ctx.font = 'bold 19px Outfit, sans-serif';
+    ctx.direction = 'ltr';
+    ctx.fillText('AL NARJIS — WALDORF ASTORIA, KUWAIT', 540, 685);
+    ctx.direction = 'rtl';
+
+    // Thin separator line
+    ctx.strokeStyle = 'rgba(102, 112, 68, 0.45)';
+    ctx.lineWidth = 1.2;
+    ctx.beginPath();
+    ctx.moveTo(260, 725);
+    ctx.lineTo(820, 725);
+    ctx.stroke();
 
     // 9. QR Code Image centered
     const qrImg = new Image();
@@ -308,7 +308,7 @@ export const InvitationCardModal: React.FC<InvitationCardModalProps> = ({
       const qrSize = 380;
       const qrBoxSize = 424;
       const qrBoxX = (1080 - qrBoxSize) / 2;
-      const qrBoxY = 818;
+      const qrBoxY = 760;
       const qrX = (1080 - qrSize) / 2;
       const qrY = qrBoxY + (qrBoxSize - qrSize) / 2;
 
@@ -346,25 +346,25 @@ export const InvitationCardModal: React.FC<InvitationCardModalProps> = ({
       // 10. Footer Notice
       ctx.fillStyle = PALETTE.burgundy;
       ctx.font = 'bold 24px Cairo, sans-serif';
-      ctx.fillText('يرجى إبراز رمز الدعوة عند الدخول — الدعوة شخصية', 540, 1285);
+      ctx.fillText('يرجى إبراز رمز الدعوة عند الدخول — الدعوة شخصية', 540, 1245);
 
       ctx.fillStyle = PALETTE.olive;
       ctx.font = '600 18px Outfit, sans-serif';
       ctx.direction = 'ltr';
-      ctx.fillText(`TOKEN: ${invitationToken}`, 540, 1325);
+      ctx.fillText(`TOKEN: ${invitationToken}`, 540, 1285);
 
       // Bottom center flourish
       ctx.fillStyle = PALETTE.burgundy;
       ctx.beginPath();
-      ctx.arc(540, 1360, 4, 0, Math.PI * 2);
+      ctx.arc(540, 1325, 4, 0, Math.PI * 2);
       ctx.fill();
 
       ctx.fillStyle = PALETTE.olive;
       ctx.beginPath();
-      ctx.ellipse(522, 1360, 7, 3, 0, 0, Math.PI * 2);
+      ctx.ellipse(522, 1325, 7, 3, 0, 0, Math.PI * 2);
       ctx.fill();
       ctx.beginPath();
-      ctx.ellipse(558, 1360, 7, 3, 0, 0, Math.PI * 2);
+      ctx.ellipse(558, 1325, 7, 3, 0, 0, Math.PI * 2);
       ctx.fill();
 
       // 11. Subtle & Elegant Powered by MeetHub credit on downloadable invitation
@@ -373,7 +373,7 @@ export const InvitationCardModal: React.FC<InvitationCardModalProps> = ({
       ctx.font = '500 15px Outfit, sans-serif';
       ctx.textAlign = 'center';
       ctx.direction = 'ltr';
-      ctx.fillText('POWERED BY MEETHUB', 540, 1400);
+      ctx.fillText('POWERED BY MEETHUB', 540, 1370);
       ctx.restore();
 
       // Generate Downloadable PNG Data URL
@@ -500,9 +500,23 @@ export const InvitationCardModal: React.FC<InvitationCardModalProps> = ({
           {/* Invitation Card Visual Representation */}
           <div className="relative w-full max-w-[380px] bg-gradient-to-b from-warmwhite via-beige-50 to-beige-100 rounded-xl border-2 border-burgundy-600/70 p-5 shadow-luxury text-center my-2">
             {/* Ornate Inner Frame */}
-            <div className="border border-olive-600/50 rounded-lg p-4 relative bg-warmwhite/60">
-              <div className="text-olive-700 text-xs font-arabic mb-1">
-                {EVENT_DETAILS.titleAr}
+            <div className="border border-olive-600/50 rounded-lg p-4 relative bg-warmwhite/60" dir="rtl">
+              <div className="text-burgundy-900 font-arabic text-xs font-semibold mb-2">
+                بِسْمِ اللَّهِ الرَّحْمَٰنِ الرَّحِيمِ
+              </div>
+
+              {/* Guest Honor Box */}
+              <div className="my-2.5 py-2 px-3 bg-warmwhite border border-burgundy-300/80 rounded-md shadow-xs">
+                <span className="text-[11px] text-olive-800 font-medium block">
+                  تشرفون بدعوة الكريمة:
+                </span>
+                <span className="font-bold text-lg text-burgundy-900 block font-arabic mt-0.5">
+                  {guest.guestName}
+                </span>
+              </div>
+
+              <div className="text-olive-700 text-xs font-arabic mb-0.5">
+                لحضور حفل عقد قران:
               </div>
               <h2 className="font-arabic font-bold text-2xl text-burgundy-950 mb-1">
                 {EVENT_DETAILS.coupleNamesAr}
@@ -514,16 +528,6 @@ export const InvitationCardModal: React.FC<InvitationCardModalProps> = ({
                 <div className="text-[11px] text-olive-800 font-semibold mt-1">
                   {EVENT_DETAILS.venueAr} — {EVENT_DETAILS.hotelAr}
                 </div>
-              </div>
-
-              {/* Guest Honor Box */}
-              <div className="my-3 py-2 px-3 bg-warmwhite border border-burgundy-300/80 rounded-md shadow-xs">
-                <span className="text-[10px] text-olive-800 font-medium block">
-                  {language === 'ar' ? 'يتشرفون بدعوة الكريم / الكريمة:' : 'Cordially invites:'}
-                </span>
-                <span className="font-bold text-base text-burgundy-900 block font-arabic mt-0.5">
-                  {guest.guestName}
-                </span>
               </div>
 
               {/* QR Code Container */}
