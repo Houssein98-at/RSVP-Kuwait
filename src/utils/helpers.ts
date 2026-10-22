@@ -223,12 +223,12 @@ export function triggerCelebrationConfetti() {
  * WhatsApp invitation message builder
  */
 export function buildWhatsAppMessage(
-  guestName: string, 
+  guestName: string,
   invitationUrl: string
 ): string {
   const message = `بِسْمِ اللَّهِ الرَّحْمَٰنِ الرَّحِيمِ
 
-تشرفون بدعوة الكريمة:
+نتشرّف بدعوة الكريمة:
 *${guestName}*
 
 لحضور حفل عقد قران:

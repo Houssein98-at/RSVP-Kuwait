@@ -84,7 +84,7 @@ export const PublicInvitationPage: React.FC = () => {
             {/* Guest Name Honor Box */}
             <div className="my-3 p-3 bg-warmwhite border border-burgundy-300/70 rounded-xl shadow-xs" dir="rtl">
               <span className="text-[12px] text-olive-800 block font-medium">
-                تشرفون بدعوة الكريمة:
+                نتشرّف بدعوة الكريمة:
               </span>
               <span className="text-xl font-bold font-arabic text-burgundy-900 block mt-1">
                 {loading ? '...' : guestName || 'الكريمة'}

@@ -230,7 +230,7 @@ export const InvitationCardModal: React.FC<InvitationCardModalProps> = ({
     // 4. Guest Honorific Banner & Name Box
     ctx.fillStyle = PALETTE.olive;
     ctx.font = '500 28px Cairo, sans-serif';
-    ctx.fillText('تشرفون بدعوة الكريمة:', 540, 235);
+    ctx.fillText('نتشرّف بدعوة الكريمة:', 540, 235);
 
     // Guest Name in elegant luxury box
     const guestBoxWidth = 840;
@@ -480,15 +480,14 @@ export const InvitationCardModal: React.FC<InvitationCardModalProps> = ({
               {language === 'ar' ? 'حالة الدعوة:' : 'Status:'}
             </span>
             <span
-              className={`px-2.5 py-0.5 rounded-full font-bold ${
-                guest.invitationStatus === 'ACTIVE'
+              className={`px-2.5 py-0.5 rounded-full font-bold ${guest.invitationStatus === 'ACTIVE'
                   ? 'bg-emerald-50 text-emerald-800 border border-emerald-300'
                   : guest.invitationStatus === 'USED'
-                  ? 'bg-blue-50 text-blue-800 border border-blue-300'
-                  : guest.invitationStatus === 'REVOKED'
-                  ? 'bg-red-50 text-red-800 border border-red-300'
-                  : 'bg-amber-50 text-amber-800 border border-amber-300'
-              }`}
+                    ? 'bg-blue-50 text-blue-800 border border-blue-300'
+                    : guest.invitationStatus === 'REVOKED'
+                      ? 'bg-red-50 text-red-800 border border-red-300'
+                      : 'bg-amber-50 text-amber-800 border border-amber-300'
+                }`}
             >
               {guest.invitationStatus === 'ACTIVE' && t.statusActive}
               {guest.invitationStatus === 'USED' && t.statusUsed}
@@ -508,7 +507,7 @@ export const InvitationCardModal: React.FC<InvitationCardModalProps> = ({
               {/* Guest Honor Box */}
               <div className="my-2.5 py-2 px-3 bg-warmwhite border border-burgundy-300/80 rounded-md shadow-xs">
                 <span className="text-[11px] text-olive-800 font-medium block">
-                  تشرفون بدعوة الكريمة:
+                  نتشرّف بدعوة الكريمة:
                 </span>
                 <span className="font-bold text-lg text-burgundy-900 block font-arabic mt-0.5">
                   {guest.guestName}

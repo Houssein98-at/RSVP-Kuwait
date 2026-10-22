@@ -46,7 +46,7 @@ export const TRANSLATIONS = {
     logout: 'تسجيل الخروج',
     adminBadge: 'مسؤول معتمد',
     switchLang: 'English',
-    
+
     // Dashboard Stats
     totalCapacity: 'السعة الإجمالية',
     registeredGuests: 'الضيوف المسجلون',
@@ -58,7 +58,7 @@ export const TRANSLATIONS = {
     revokedInvitations: 'دعوات ملغاة',
     recentArrivals: 'آخر الحاضرين',
     noRecentArrivals: 'لا توجد عمليات دخول مسجلة حتى الآن',
-    
+
     // Table
     searchPlaceholder: 'بحث بالاسم أو رقم الهاتف...',
     filterAll: 'الكل',
@@ -75,7 +75,7 @@ export const TRANSLATIONS = {
     checkInTime: 'وقت الوصول',
     actions: 'الإجراءات',
     exportCsv: 'تصدير كشف الضيوف (CSV)',
-    
+
     // Actions
     viewInvitation: 'عرض البطاقة',
     downloadInvitation: 'تحميل البطاقة',
@@ -87,7 +87,7 @@ export const TRANSLATIONS = {
     reverseCheckIn: 'إلغاء تسجيل الدخول',
     editGuest: 'تعديل البيانات',
     deleteGuest: 'حذف الضيف',
-    
+
     // Guest Management
     addNewGuest: 'إضافة ضيف جديد',
     bulkImport: 'استيراد جماعي (CSV)',
@@ -104,7 +104,7 @@ export const TRANSLATIONS = {
     shareWhatsApp: 'إرسال عبر واتساب',
     shareNative: 'مشاركة البطاقة',
     copyLink: 'نسخ رابط الدعوة',
-    
+
     // Scanner
     scannerTitle: 'ماسح رمز الدخول QR',
     scannerSubtitle: 'وجّه الكاميرا نحو رمز QR على بطاقة الضيف للتحقق الفوري',
@@ -116,7 +116,7 @@ export const TRANSLATIONS = {
     scanNext: 'مسح الضيف التالي',
     manualLookupTitle: 'البحث اليدوي البديل عن ضيف',
     manualLookupPlaceholder: 'ابحث بالاسم أو الهاتف للتحضير اليدوي...',
-    
+
     // Scanner Responses
     validInvitation: 'دعوة صالحة ومؤكدة',
     confirmEntry: 'تأكيد تسجيل الدخول (Confirm Entry)',
@@ -127,7 +127,7 @@ export const TRANSLATIONS = {
     invalidDesc: 'هذا الرمز غير مسجل في قاعدة بيانات الحفل.',
     revokedTitle: 'دعوة ملغاة!',
     revokedDesc: 'تم إلغاء هذه الدعوة رسمياً من قبل الإدارة.',
-    
+
     // Status Labels
     statusActive: 'نشطة وجاهزة',
     statusUsed: 'تم الحضور',
@@ -135,7 +135,7 @@ export const TRANSLATIONS = {
     statusRevoked: 'ملغاة',
     statusArrived: 'حاضر',
     statusNotArrivedShort: 'لم يحضر',
-    
+
     // Alerts and Dialogs
     confirmTitle: 'تأكيد العملية',
     confirmReissueDesc: 'إعادة إصدار الرمز ستلغي الرمز السابق فوراً وتنشئ رمزاً جديداً. هل أنت متأكد؟',
@@ -148,12 +148,12 @@ export const TRANSLATIONS = {
     resetSuccess: 'تمت إعادة تعيين الدعوة وتوليد رمز QR جديد بنجاح',
     confirmDeleteDesc: 'هل أنت متأكد من حذف هذا السجل نهائياً؟',
     yesProceed: 'نعم، تابع',
-    
+
     // Invitation Card
-    cardHonor: 'تشرفون بدعوة الكريمة:',
+    cardHonor: 'نتشرّف بدعوة الكريمة:',
     cardNotice: 'يرجى إبراز رمز الدعوة عند الدخول',
     cardPersonal: 'الدعوة شخصية ولا يجوز تحويلها',
-    
+
     // Login
     loginTitle: 'بوابة الإدارة المعتمدة',
     loginSubtitle: 'حفل عقد قران ساره وعبدالله — النرجس، والدورف أستوريا',
@@ -176,7 +176,7 @@ export const TRANSLATIONS = {
     logout: 'Log Out',
     adminBadge: 'Authorized Admin',
     switchLang: 'العربية',
-    
+
     // Dashboard Stats
     totalCapacity: 'Total Capacity',
     registeredGuests: 'Registered Guests',
@@ -188,7 +188,7 @@ export const TRANSLATIONS = {
     revokedInvitations: 'Revoked Invitations',
     recentArrivals: 'Recent Arrivals',
     noRecentArrivals: 'No arrivals recorded yet',
-    
+
     // Table
     searchPlaceholder: 'Search by name or phone...',
     filterAll: 'All',
@@ -205,7 +205,7 @@ export const TRANSLATIONS = {
     checkInTime: 'Arrival Time',
     actions: 'Actions',
     exportCsv: 'Export Guest List (CSV)',
-    
+
     // Actions
     viewInvitation: 'View Card',
     downloadInvitation: 'Download Card',
@@ -217,7 +217,7 @@ export const TRANSLATIONS = {
     reverseCheckIn: 'Reverse Check-In',
     editGuest: 'Edit Details',
     deleteGuest: 'Delete Guest',
-    
+
     // Guest Management
     addNewGuest: 'Add New Guest',
     bulkImport: 'Bulk Import (CSV)',
@@ -234,7 +234,7 @@ export const TRANSLATIONS = {
     shareWhatsApp: 'Send via WhatsApp',
     shareNative: 'Share Invitation Card',
     copyLink: 'Copy Invitation Link',
-    
+
     // Scanner
     scannerTitle: 'Entrance QR Scanner',
     scannerSubtitle: 'Point the camera at the guest QR code for instant entry verification',
@@ -246,7 +246,7 @@ export const TRANSLATIONS = {
     scanNext: 'Scan Next Guest',
     manualLookupTitle: 'Manual Guest Check-In Fallback',
     manualLookupPlaceholder: 'Search by name or phone to check in manually...',
-    
+
     // Scanner Responses
     validInvitation: 'Valid & Verified Invitation',
     confirmEntry: 'Confirm Entry',
@@ -257,7 +257,7 @@ export const TRANSLATIONS = {
     invalidDesc: 'This QR code is not recognized in the event database.',
     revokedTitle: 'Revoked Invitation!',
     revokedDesc: 'This invitation was revoked by the event administration.',
-    
+
     // Status Labels
     statusActive: 'Active & Ready',
     statusUsed: 'Checked In',
@@ -265,7 +265,7 @@ export const TRANSLATIONS = {
     statusRevoked: 'Revoked',
     statusArrived: 'Arrived',
     statusNotArrivedShort: 'Not Arrived',
-    
+
     // Alerts and Dialogs
     confirmTitle: 'Confirm Action',
     confirmReissueDesc: 'Reissuing will immediately invalidate the previous QR code and generate a new one. Are you sure?',
@@ -278,12 +278,12 @@ export const TRANSLATIONS = {
     resetSuccess: 'Test invitation was successfully reset and a new QR code generated',
     confirmDeleteDesc: 'Are you sure you want to permanently delete this guest?',
     yesProceed: 'Yes, Proceed',
-    
+
     // Invitation Card
     cardHonor: 'Cordially invites you to the Wedding Contract Celebration of',
     cardNotice: 'Please present this invitation QR code at the entrance',
     cardPersonal: 'This invitation is personal and non-transferable',
-    
+
     // Login
     loginTitle: 'Authorized Admin Portal',
     loginSubtitle: 'Sara & Abdullah Wedding Contract — AL NARJIS, WALDORF ASTORIA',
