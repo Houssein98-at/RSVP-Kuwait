@@ -5,6 +5,7 @@ import { EVENT_DETAILS } from '../utils/constants';
 import { validateToken } from '../services/firestore';
 import { Calendar, MapPin, Clock, ShieldCheck, Heart } from 'lucide-react';
 import { MeetHubFooter } from '../components/MeetHubFooter';
+import { getEventCountdown, buildGoogleCalendarUrl } from '../utils/helpers';
 
 export const PublicInvitationPage: React.FC = () => {
   const { token } = useParams<{ token: string }>();
@@ -12,6 +13,14 @@ export const PublicInvitationPage: React.FC = () => {
   const [qrDataUrl, setQrDataUrl] = useState<string>('');
   const [loading, setLoading] = useState<boolean>(true);
   const [statusMessage, setStatusMessage] = useState<string | null>(null);
+  const [countdown, setCountdown] = useState(getEventCountdown());
+
+  useEffect(() => {
+    const timer = setInterval(() => {
+      setCountdown(getEventCountdown());
+    }, 1000);
+    return () => clearInterval(timer);
+  }, []);
 
   useEffect(() => {
     if (!token) {
@@ -113,6 +122,47 @@ export const PublicInvitationPage: React.FC = () => {
                 <MapPin className="w-3.5 h-3.5 text-olive-600" />
                 <span>{EVENT_DETAILS.venueAr} — {EVENT_DETAILS.hotelAr}، الكويت</span>
               </div>
+            </div>
+
+            {/* Event Countdown Timer (Target: 29 December 2026 at 7:00 PM Kuwait Time) */}
+            <div
+              className="my-3 py-2 px-3 bg-warmwhite/90 border border-burgundy-200/90 rounded-xl text-center shadow-xs"
+              data-testid="event-countdown-timer"
+            >
+              <span className="text-[11px] text-olive-800 font-semibold block mb-1">
+                العد التنازلي لموعد الحفل:
+              </span>
+              <div className="flex justify-center items-center gap-1.5 text-xs font-mono font-bold text-burgundy-900" dir="ltr">
+                <span className="bg-beige-100 px-1.5 py-0.5 rounded border border-beige-300">
+                  {countdown.days} <span className="text-[10px] text-charcoal-500 font-sans">يوم</span>
+                </span>
+                <span>:</span>
+                <span className="bg-beige-100 px-1.5 py-0.5 rounded border border-beige-300">
+                  {String(countdown.hours).padStart(2, '0')} <span className="text-[10px] text-charcoal-500 font-sans">س</span>
+                </span>
+                <span>:</span>
+                <span className="bg-beige-100 px-1.5 py-0.5 rounded border border-beige-300">
+                  {String(countdown.minutes).padStart(2, '0')} <span className="text-[10px] text-charcoal-500 font-sans">د</span>
+                </span>
+                <span>:</span>
+                <span className="bg-beige-100 px-1.5 py-0.5 rounded border border-beige-300">
+                  {String(countdown.seconds).padStart(2, '0')} <span className="text-[10px] text-charcoal-500 font-sans">ث</span>
+                </span>
+              </div>
+            </div>
+
+            {/* Calendar Integration */}
+            <div className="my-2.5 flex justify-center">
+              <a
+                href={buildGoogleCalendarUrl()}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="inline-flex items-center gap-1.5 text-[11px] text-burgundy-800 hover:text-burgundy-950 font-semibold py-1 px-3 rounded-xl border border-burgundy-300/80 bg-warmwhite hover:bg-beige-50 transition-colors shadow-2xs"
+                title="إضافة موعد الحفل إلى تقويم Google"
+              >
+                <Calendar className="w-3.5 h-3.5 text-olive-600" />
+                <span>إضافة إلى التقويم (Google Calendar)</span>
+              </a>
             </div>
 
             {/* QR Pass */}

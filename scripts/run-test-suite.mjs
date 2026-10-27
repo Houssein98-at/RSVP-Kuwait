@@ -887,13 +887,13 @@ async function runTestSuite() {
   // -------------------------------------------------------------
   console.log('\n--- Section 10: Kuwait Timezone (Asia/Kuwait) Formatting ---');
   try {
-    // 2026-12-29 16:30:00 UTC = 19:30 (7:30 PM) in Asia/Kuwait (UTC+3)
-    const testUtcDate = '2026-12-29T16:30:00.000Z';
+    // 2026-12-29 16:00:00 UTC = 19:00 (7:00 PM) in Asia/Kuwait (UTC+3)
+    const testUtcDate = '2026-12-29T16:00:00.000Z';
     const kwAr = formatKuwaitDateTime(testUtcDate, 'ar');
     const kwEn = formatKuwaitDateTime(testUtcDate, 'en');
 
     const has2026 = kwAr.includes('2026') || kwAr.includes('٢٠٢٦');
-    const hasTime = kwAr.includes('7:30') || kwAr.includes('07:30') || kwAr.includes('٧:٣٠') || kwAr.includes('٠٧:٣٠');
+    const hasTime = kwAr.includes('7:00') || kwAr.includes('07:00') || kwAr.includes('٧:٠٠') || kwAr.includes('٠٧:٠٠');
     if (has2026 && hasTime) {
       pass('formatKuwaitDateTime converts UTC to Kuwait local time (+3h) in Arabic', kwAr);
     } else {

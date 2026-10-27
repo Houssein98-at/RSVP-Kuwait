@@ -11,9 +11,9 @@ export interface EventDetails {
   coupleNamesAr: string;
   coupleNamesEn: string;
   date: string; // "2026-12-29"
-  time: string; // "19:30"
-  timeFormattedAr: string; // "7:30 مساءً"
-  timeFormattedEn: string; // "7:30 PM"
+  time: string; // "19:00"
+  timeFormattedAr: string; // "٧:٠٠ مساءً"
+  timeFormattedEn: string; // "7:00 PM"
   dateFormattedAr: string; // "الثلاثاء 29 ديسمبر 2026"
   dateFormattedEn: string; // "Tuesday, 29 December 2026"
   timeZone: string; // "Asia/Kuwait"
@@ -24,6 +24,8 @@ export interface EventDetails {
   country: string; // "Kuwait"
   capacity: number; // 125
   phoneCountryCode: string; // "+965"
+  targetDateTimeIso?: string; // "2026-12-29T19:00:00+03:00"
+  targetTimestamp?: number; // 1798560000000
 }
 
 export interface Guest {

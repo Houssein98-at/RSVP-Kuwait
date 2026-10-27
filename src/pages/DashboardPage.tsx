@@ -714,19 +714,27 @@ export const DashboardPage: React.FC<DashboardPageProps> = ({
             <div className="space-y-1.5 text-charcoal-700">
               <div className="flex justify-between border-b border-beige-200/60 pb-1">
                 <span>{language === 'ar' ? 'التاريخ:' : 'Date:'}</span>
-                <span className="font-bold text-charcoal-900">{EVENT_DETAILS.dateFormattedAr}</span>
+                <span className="font-bold text-charcoal-900">
+                  {language === 'ar' ? EVENT_DETAILS.dateFormattedAr : EVENT_DETAILS.dateFormattedEn}
+                </span>
               </div>
               <div className="flex justify-between border-b border-beige-200/60 pb-1">
                 <span>{language === 'ar' ? 'الوقت:' : 'Time:'}</span>
-                <span className="font-bold text-burgundy-800">{EVENT_DETAILS.timeFormattedAr}</span>
+                <span className="font-bold text-burgundy-800">
+                  {language === 'ar' ? EVENT_DETAILS.timeFormattedAr : EVENT_DETAILS.timeFormattedEn}
+                </span>
               </div>
               <div className="flex justify-between border-b border-beige-200/60 pb-1">
                 <span>{language === 'ar' ? 'القاعة:' : 'Venue:'}</span>
-                <span className="font-bold text-olive-800">{EVENT_DETAILS.venueAr}</span>
+                <span className="font-bold text-olive-800">
+                  {language === 'ar' ? EVENT_DETAILS.venueAr : EVENT_DETAILS.venueEn}
+                </span>
               </div>
               <div className="flex justify-between">
                 <span>{language === 'ar' ? 'الفندق:' : 'Hotel:'}</span>
-                <span className="font-bold text-charcoal-900">{EVENT_DETAILS.hotelAr}</span>
+                <span className="font-bold text-charcoal-900">
+                  {language === 'ar' ? EVENT_DETAILS.hotelAr : EVENT_DETAILS.hotelEn}
+                </span>
               </div>
             </div>
           </div>

@@ -7,9 +7,9 @@ export const EVENT_DETAILS: EventDetails = {
   coupleNamesAr: 'ساره وعبدالله',
   coupleNamesEn: 'Sara & Abdullah',
   date: '2026-12-29',
-  time: '19:30',
-  timeFormattedAr: '7:30 مساءً',
-  timeFormattedEn: '7:30 PM',
+  time: '19:00',
+  timeFormattedAr: '٧:٠٠ مساءً',
+  timeFormattedEn: '7:00 PM',
   dateFormattedAr: 'الثلاثاء 29 ديسمبر 2026',
   dateFormattedEn: 'Tuesday, 29 December 2026',
   timeZone: 'Asia/Kuwait',
@@ -20,6 +20,8 @@ export const EVENT_DETAILS: EventDetails = {
   country: 'Kuwait',
   capacity: 125,
   phoneCountryCode: '+965',
+  targetDateTimeIso: '2026-12-29T19:00:00+03:00',
+  targetTimestamp: 1798560000000,
 };
 
 export const PRODUCTION_HOSTING_URL = 'https://rsvp-kuwait-2026.web.app';

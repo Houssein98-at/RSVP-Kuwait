@@ -10,7 +10,7 @@ A production-ready, luxury event invitation and entrance check-in application bu
 - **Event Title (Arabic):** حفل عقد قران
 - **Couple Names:** ساره وعبدالله (Sara & Abdullah)
 - **Date:** Tuesday, 29 December 2026 (الثلاثاء 29 ديسمبر 2026)
-- **Time:** 7:30 PM (7:30 مساءً)
+- **Time:** 7:00 PM (الساعة ٧:٠٠ مساءً)
 - **Time Zone:** `Asia/Kuwait` (+03:00)
 - **Venue:** النرجس — والدورف أستوريا، الكويت (AL NARJIS — WALDORF ASTORIA, Kuwait)
 - **Guest Capacity:** 125 guests

@@ -235,7 +235,7 @@ export function buildWhatsAppMessage(
 *ساره وعبدالله*
 
 📅 الثلاثاء 29 ديسمبر 2026
-⏰ الساعة 7:30 مساءً
+⏰ الساعة ٧:٠٠ مساءً
 📍 قاعة النرجس — فندق والدورف أستوريا، الكويت
 
 🎫 رابط بطاقة الدعوة ورمز الدخول الخاص بكم:
@@ -245,4 +245,46 @@ ${invitationUrl}
 حضوركم يشرفنا ويسعدنا.`;
 
   return encodeURIComponent(message);
+}
+
+/**
+ * Event target Date in Asia/Kuwait (UTC+3)
+ * 2026-12-29 19:00:00 (+03:00) = 2026-12-29 16:00:00 UTC
+ */
+export const EVENT_TARGET_DATE_ISO = '2026-12-29T19:00:00+03:00';
+export const EVENT_TARGET_TIMESTAMP = 1798560000000; // 2026-12-29 19:00 Kuwait Time (16:00 UTC)
+
+/**
+ * Calculates countdown remaining time to the event (29 Dec 2026 19:00 Kuwait Time)
+ */
+export function getEventCountdown(now: number = Date.now()): {
+  totalMs: number;
+  days: number;
+  hours: number;
+  minutes: number;
+  seconds: number;
+  isPast: boolean;
+} {
+  const diff = EVENT_TARGET_TIMESTAMP - now;
+  if (diff <= 0) {
+    return { totalMs: 0, days: 0, hours: 0, minutes: 0, seconds: 0, isPast: true };
+  }
+  const seconds = Math.floor((diff / 1000) % 60);
+  const minutes = Math.floor((diff / (1000 * 60)) % 60);
+  const hours = Math.floor((diff / (1000 * 60 * 60)) % 24);
+  const days = Math.floor(diff / (1000 * 60 * 60 * 24));
+  return { totalMs: diff, days, hours, minutes, seconds, isPast: false };
+}
+
+/**
+ * Generates Google Calendar link for the wedding celebration
+ * 2026-12-29 19:00 to 23:00 Kuwait Time (16:00 to 20:00 UTC)
+ */
+export function buildGoogleCalendarUrl(): string {
+  const startIso = '20261229T160000Z';
+  const endIso = '20261229T200000Z';
+  const title = encodeURIComponent('حفل عقد قران ساره وعبدالله | Sara & Abdullah Wedding Contract');
+  const details = encodeURIComponent('نتشرّف بدعوتكم لحضور حفل عقد قران ساره وعبدالله في قاعة النرجس، فندق والدورف أستوريا، الكويت. الساعة ٧:٠٠ مساءً.');
+  const location = encodeURIComponent('قاعة النرجس، فندق والدورف أستوريا، الكويت | AL NARJIS, WALDORF ASTORIA, Kuwait');
+  return `https://calendar.google.com/calendar/render?action=TEMPLATE&text=${title}&dates=${startIso}/${endIso}&details=${details}&location=${location}&ctz=Asia/Kuwait`;
 }

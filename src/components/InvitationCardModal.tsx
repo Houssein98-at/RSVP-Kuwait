@@ -281,7 +281,7 @@ export const InvitationCardModal: React.FC<InvitationCardModalProps> = ({
 
     ctx.fillStyle = PALETTE.burgundy;
     ctx.font = '600 24px Cairo, Tajawal, sans-serif';
-    ctx.fillText('الساعة 7:30 مساءً', 540, 595);
+    ctx.fillText('الساعة ٧:٠٠ مساءً', 540, 595);
 
     // 8. Venue (Arabic in Olive & English in Dark Charcoal)
     ctx.fillStyle = PALETTE.olive;
@@ -523,7 +523,7 @@ export const InvitationCardModal: React.FC<InvitationCardModalProps> = ({
 
               <div className="text-xs text-charcoal-700 font-medium my-2">
                 <div>{EVENT_DETAILS.dateFormattedAr}</div>
-                <div className="text-burgundy-800 font-bold">{EVENT_DETAILS.timeFormattedAr}</div>
+                <div className="text-burgundy-800 font-bold">الساعة {EVENT_DETAILS.timeFormattedAr}</div>
                 <div className="text-[11px] text-olive-800 font-semibold mt-1">
                   {EVENT_DETAILS.venueAr} — {EVENT_DETAILS.hotelAr}
                 </div>
