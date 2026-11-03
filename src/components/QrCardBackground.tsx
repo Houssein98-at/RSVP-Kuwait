@@ -1,5 +1,6 @@
 import React from 'react';
 import backgroundCardUrl from '../assets/background_card.jpg';
+import koraanVerseUrl from '../assets/koraan-verse.png';
 
 interface QrCardBackgroundProps {
   children: React.ReactNode;
@@ -38,5 +39,5 @@ export const QrCardBackground: React.FC<QrCardBackgroundProps> = ({
   );
 };
 
-export { backgroundCardUrl };
+export { backgroundCardUrl, koraanVerseUrl };
 

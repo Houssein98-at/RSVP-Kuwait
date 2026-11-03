@@ -5,7 +5,7 @@ import { EVENT_DETAILS } from '../utils/constants';
 import { validateToken } from '../services/firestore';
 import { Calendar, MapPin, Clock, ShieldCheck, Heart } from 'lucide-react';
 import { MeetHubFooter } from '../components/MeetHubFooter';
-import { QrCardBackground } from '../components/QrCardBackground';
+import { QrCardBackground, koraanVerseUrl } from '../components/QrCardBackground';
 import { getEventCountdown, buildGoogleCalendarUrl } from '../utils/helpers';
 
 export const PublicInvitationPage: React.FC = () => {
@@ -85,10 +85,14 @@ export const PublicInvitationPage: React.FC = () => {
           className="luxury-card rounded-3xl p-6 sm:p-8 border-2 border-burgundy-500/40"
           innerClassName="border border-burgundy-300/60 rounded-2xl p-5"
         >
-          {/* Calligraphy Bismillah */}
-          <p className="font-arabic text-sm text-burgundy-900 font-bold mb-2">
-            بِسْمِ اللَّهِ الرَّحْمَٰنِ الرَّحِيمِ
-          </p>
+          {/* Quran Verse Calligraphy Header */}
+          <div className="flex justify-center mb-2">
+            <img
+              src={koraanVerseUrl}
+              alt="وجعل بينكم مودة ورحمة"
+              className="h-14 sm:h-16 w-auto object-contain"
+            />
+          </div>
 
           <div className="w-16 h-0.5 bg-gradient-to-r from-transparent via-burgundy-500 to-transparent mx-auto mb-3" />
 

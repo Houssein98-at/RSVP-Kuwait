@@ -6,7 +6,7 @@ import { useLanguage } from '../contexts/LanguageContext';
 import { buildWhatsAppMessage } from '../utils/helpers';
 import { Download, Share2, MessageCircle, Copy, Check, X, ShieldAlert, Sparkles, RotateCcw } from 'lucide-react';
 import { ResetTestModal } from './ResetTestModal';
-import { QrCardBackground, backgroundCardUrl } from './QrCardBackground';
+import { QrCardBackground, backgroundCardUrl, koraanVerseUrl } from './QrCardBackground';
 
 interface InvitationCardModalProps {
   guest: Guest;
@@ -111,8 +111,8 @@ export const InvitationCardModal: React.FC<InvitationCardModalProps> = ({
         img.src = src;
       });
 
-    Promise.all([loadImage(backgroundCardUrl), loadImage(qrDataUrl)])
-      .then(([bgImg, qrImg]) => {
+    Promise.all([loadImage(backgroundCardUrl), loadImage(koraanVerseUrl), loadImage(qrDataUrl)])
+      .then(([bgImg, verseImg, qrImg]) => {
         if (cancelled) return;
 
         // High resolution card: 1080 x 1500 px
@@ -203,12 +203,16 @@ export const InvitationCardModal: React.FC<InvitationCardModalProps> = ({
         drawCornerFlourish(58, 1442, 1, -1);
         drawCornerFlourish(1022, 1442, -1, -1);
 
-        // 3. Header: Bismillah in Calligraphy styling
-        ctx.fillStyle = PALETTE.burgundy;
-        ctx.font = 'bold 36px Amiri, Cairo, serif';
+        // 3. Header: Quran Verse Calligraphy Image (وجعل بينكم مودة ورحمة)
+        const verseMaxWidth = 340;
+        const verseRatio = verseImg.width / verseImg.height;
+        const verseWidth = verseMaxWidth;
+        const verseHeight = verseWidth / verseRatio;
+        const verseX = (cardW - verseWidth) / 2;
+        const verseY = 74;
+        ctx.drawImage(verseImg, verseX, verseY, verseWidth, verseHeight);
         ctx.textAlign = 'center';
         ctx.direction = 'rtl';
-        ctx.fillText('بِسْمِ اللَّهِ الرَّحْمَٰنِ الرَّحِيمِ', 540, 150);
 
         // Arabesque Botanical Center Divider (Olive Leaves + Burgundy Diamond)
         ctx.save();
@@ -216,41 +220,41 @@ export const InvitationCardModal: React.FC<InvitationCardModalProps> = ({
         ctx.strokeStyle = 'rgba(107, 35, 55, 0.4)';
         ctx.lineWidth = 1.5;
         ctx.beginPath();
-        ctx.moveTo(340, 185);
-        ctx.lineTo(495, 185);
-        ctx.moveTo(585, 185);
-        ctx.lineTo(740, 185);
+        ctx.moveTo(340, 212);
+        ctx.lineTo(495, 212);
+        ctx.moveTo(585, 212);
+        ctx.lineTo(740, 212);
         ctx.stroke();
 
         // Center burgundy diamond
         ctx.fillStyle = PALETTE.burgundy;
         ctx.beginPath();
-        ctx.moveTo(540, 177);
-        ctx.lineTo(548, 185);
-        ctx.lineTo(540, 193);
-        ctx.lineTo(532, 185);
+        ctx.moveTo(540, 204);
+        ctx.lineTo(548, 212);
+        ctx.lineTo(540, 220);
+        ctx.lineTo(532, 212);
         ctx.closePath();
         ctx.fill();
 
         // Two olive leaf accents
         ctx.fillStyle = PALETTE.olive;
         ctx.beginPath();
-        ctx.ellipse(516, 185, 8, 3.5, 0, 0, Math.PI * 2);
+        ctx.ellipse(516, 212, 8, 3.5, 0, 0, Math.PI * 2);
         ctx.fill();
         ctx.beginPath();
-        ctx.ellipse(564, 185, 8, 3.5, 0, 0, Math.PI * 2);
+        ctx.ellipse(564, 212, 8, 3.5, 0, 0, Math.PI * 2);
         ctx.fill();
         ctx.restore();
 
         // 4. Guest Honorific Banner & Name Box
         ctx.fillStyle = PALETTE.olive;
         ctx.font = '500 28px Cairo, sans-serif';
-        ctx.fillText('نتشرّف بدعوة الكريمة:', 540, 235);
+        ctx.fillText('نتشرّف بدعوة الكريمة:', 540, 250);
 
         // Guest Name in elegant luxury box
         const guestBoxWidth = 840;
         const guestBoxX = (1080 - guestBoxWidth) / 2;
-        const guestBoxY = 260;
+        const guestBoxY = 268;
         const guestBoxHeight = 92;
 
         // Outer Burgundy border
@@ -273,7 +277,7 @@ export const InvitationCardModal: React.FC<InvitationCardModalProps> = ({
         // Guest Name
         ctx.fillStyle = PALETTE.burgundy;
         ctx.font = 'bold 42px Amiri, Cairo, serif';
-        ctx.fillText(currentGuest.guestName, 540, 322);
+        ctx.fillText(currentGuest.guestName, 540, 328);
 
         // 5. Ceremony Header in Olive Green
         ctx.fillStyle = PALETTE.olive;
@@ -517,8 +521,12 @@ export const InvitationCardModal: React.FC<InvitationCardModalProps> = ({
             innerClassName="border border-olive-600/50 rounded-lg p-4"
             dir="rtl"
           >
-            <div className="text-burgundy-900 font-arabic text-xs font-semibold mb-2">
-              بِسْمِ اللَّهِ الرَّحْمَٰنِ الرَّحِيمِ
+            <div className="flex justify-center mb-2">
+              <img
+                src={koraanVerseUrl}
+                alt="وجعل بينكم مودة ورحمة"
+                className="h-12 sm:h-14 w-auto object-contain"
+              />
             </div>
 
             {/* Guest Honor Box */}
