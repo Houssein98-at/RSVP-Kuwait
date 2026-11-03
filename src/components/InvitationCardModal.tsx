@@ -139,10 +139,6 @@ export const InvitationCardModal: React.FC<InvitationCardModalProps> = ({
 
         ctx.drawImage(bgImg, sx, sy, sw, sh, 0, 0, cardW, cardH);
 
-        // Subtle warm veil for optimal text contrast over the watercolor texture
-        ctx.fillStyle = 'rgba(250, 248, 244, 0.18)';
-        ctx.fillRect(0, 0, cardW, cardH);
-
         // 2. Ornate Outer Burgundy Border
         ctx.strokeStyle = PALETTE.burgundy;
         ctx.lineWidth = 7;
@@ -256,10 +252,6 @@ export const InvitationCardModal: React.FC<InvitationCardModalProps> = ({
         const guestBoxX = (1080 - guestBoxWidth) / 2;
         const guestBoxY = 260;
         const guestBoxHeight = 92;
-
-        // Fill Warm White background
-        ctx.fillStyle = PALETTE.warmWhite;
-        ctx.fillRect(guestBoxX, guestBoxY, guestBoxWidth, guestBoxHeight);
 
         // Outer Burgundy border
         ctx.strokeStyle = PALETTE.burgundy;
@@ -522,7 +514,7 @@ export const InvitationCardModal: React.FC<InvitationCardModalProps> = ({
           {/* Invitation Card Visual Representation */}
           <QrCardBackground
             className="w-full max-w-[380px] rounded-xl border-2 border-burgundy-600/70 p-5 my-2"
-            innerClassName="border border-olive-600/50 rounded-lg p-4 bg-warmwhite/60"
+            innerClassName="border border-olive-600/50 rounded-lg p-4"
             dir="rtl"
           >
             <div className="text-burgundy-900 font-arabic text-xs font-semibold mb-2">
@@ -530,7 +522,7 @@ export const InvitationCardModal: React.FC<InvitationCardModalProps> = ({
             </div>
 
             {/* Guest Honor Box */}
-            <div className="my-2.5 py-2 px-3 bg-warmwhite border border-burgundy-300/80 rounded-md shadow-xs">
+            <div className="my-2.5 py-2 px-3 border border-burgundy-300/80 rounded-md">
               <span className="text-[11px] text-olive-800 font-medium block">
                 نتشرّف بدعوة الكريمة:
               </span>

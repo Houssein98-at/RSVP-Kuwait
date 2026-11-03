@@ -27,9 +27,6 @@ export const QrCardBackground: React.FC<QrCardBackgroundProps> = ({
         backgroundImage: `url(${backgroundCardUrl})`,
       }}
     >
-      {/* Subtle warm veil to ensure crisp legibility across the watercolor texture */}
-      <div className="absolute inset-0 bg-warmwhite/20 pointer-events-none" />
-
       {/* Ornate Inner Frame */}
       <div
         className={`relative z-10 ${innerClassName}`}

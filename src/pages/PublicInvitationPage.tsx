@@ -83,7 +83,7 @@ export const PublicInvitationPage: React.FC = () => {
       <div className="max-w-md w-full mx-auto my-auto animate-fade-in">
         <QrCardBackground
           className="luxury-card rounded-3xl p-6 sm:p-8 border-2 border-burgundy-500/40"
-          innerClassName="border border-burgundy-300/60 rounded-2xl p-5 bg-warmwhite/60"
+          innerClassName="border border-burgundy-300/60 rounded-2xl p-5"
         >
           {/* Calligraphy Bismillah */}
           <p className="font-arabic text-sm text-burgundy-900 font-bold mb-2">
@@ -93,7 +93,7 @@ export const PublicInvitationPage: React.FC = () => {
           <div className="w-16 h-0.5 bg-gradient-to-r from-transparent via-burgundy-500 to-transparent mx-auto mb-3" />
 
           {/* Guest Name Honor Box */}
-          <div className="my-3 p-3 bg-warmwhite border border-burgundy-300/70 rounded-xl shadow-xs" dir="rtl">
+          <div className="my-3 p-3 border border-burgundy-300/70 rounded-xl" dir="rtl">
             <span className="text-[12px] text-olive-800 block font-medium">
               نتشرّف بدعوة الكريمة:
             </span>
@@ -111,7 +111,7 @@ export const PublicInvitationPage: React.FC = () => {
           </h1>
 
           {/* Event Time & Location Details */}
-          <div className="space-y-1.5 text-xs text-charcoal-700 font-medium my-4 bg-warmwhite/80 p-3 rounded-xl border border-beige-300/80">
+          <div className="space-y-1.5 text-xs text-charcoal-700 font-medium my-4 p-3 rounded-xl border border-burgundy-300/60">
             <div className="flex items-center justify-center gap-1.5 font-bold text-charcoal-900">
               <Calendar className="w-3.5 h-3.5 text-olive-600" />
               <span>{EVENT_DETAILS.dateFormattedAr}</span>
@@ -128,27 +128,27 @@ export const PublicInvitationPage: React.FC = () => {
 
           {/* Event Countdown Timer (Target: 29 December 2026 at 7:00 PM Kuwait Time) */}
           <div
-            className="my-3 py-2 px-3 bg-warmwhite/90 border border-burgundy-200/90 rounded-xl text-center shadow-xs"
+            className="my-3 py-2 px-3 border border-burgundy-300/60 rounded-xl text-center"
             data-testid="event-countdown-timer"
           >
             <span className="text-[11px] text-olive-800 font-semibold block mb-1">
               العد التنازلي لموعد الحفل:
             </span>
             <div className="flex justify-center items-center gap-1.5 text-xs font-mono font-bold text-burgundy-900" dir="ltr">
-              <span className="bg-beige-100 px-1.5 py-0.5 rounded border border-beige-300">
-                {countdown.days} <span className="text-[10px] text-charcoal-500 font-sans">يوم</span>
+              <span className="px-1.5 py-0.5 rounded border border-burgundy-300/60">
+                {countdown.days} <span className="text-[10px] text-charcoal-600 font-sans">يوم</span>
               </span>
               <span>:</span>
-              <span className="bg-beige-100 px-1.5 py-0.5 rounded border border-beige-300">
-                {String(countdown.hours).padStart(2, '0')} <span className="text-[10px] text-charcoal-500 font-sans">س</span>
+              <span className="px-1.5 py-0.5 rounded border border-burgundy-300/60">
+                {String(countdown.hours).padStart(2, '0')} <span className="text-[10px] text-charcoal-600 font-sans">س</span>
               </span>
               <span>:</span>
-              <span className="bg-beige-100 px-1.5 py-0.5 rounded border border-beige-300">
-                {String(countdown.minutes).padStart(2, '0')} <span className="text-[10px] text-charcoal-500 font-sans">د</span>
+              <span className="px-1.5 py-0.5 rounded border border-burgundy-300/60">
+                {String(countdown.minutes).padStart(2, '0')} <span className="text-[10px] text-charcoal-600 font-sans">د</span>
               </span>
               <span>:</span>
-              <span className="bg-beige-100 px-1.5 py-0.5 rounded border border-beige-300">
-                {String(countdown.seconds).padStart(2, '0')} <span className="text-[10px] text-charcoal-500 font-sans">ث</span>
+              <span className="px-1.5 py-0.5 rounded border border-burgundy-300/60">
+                {String(countdown.seconds).padStart(2, '0')} <span className="text-[10px] text-charcoal-600 font-sans">ث</span>
               </span>
             </div>
           </div>
@@ -159,7 +159,7 @@ export const PublicInvitationPage: React.FC = () => {
               href={buildGoogleCalendarUrl()}
               target="_blank"
               rel="noopener noreferrer"
-              className="inline-flex items-center gap-1.5 text-[11px] text-burgundy-800 hover:text-burgundy-950 font-semibold py-1 px-3 rounded-xl border border-burgundy-300/80 bg-warmwhite hover:bg-beige-50 transition-colors shadow-2xs"
+              className="inline-flex items-center gap-1.5 text-[11px] text-burgundy-800 hover:text-burgundy-950 font-semibold py-1 px-3 rounded-xl border border-burgundy-300/80 hover:bg-warmwhite/30 transition-colors"
               title="إضافة موعد الحفل إلى تقويم Google"
             >
               <Calendar className="w-3.5 h-3.5 text-olive-600" />
