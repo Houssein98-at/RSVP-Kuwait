@@ -1,6 +1,8 @@
 import React from 'react';
 import backgroundCardUrl from '../assets/background_card.jpg';
-import koraanVerseUrl from '../assets/koraan-verse.png';
+
+export const QURAN_VERSE_TEXT =
+  'وَمِنْ آيَاتِهِ أَنْ خَلَقَ لَكُم مِّنْ أَنفُسِكُمْ أَزْوَاجًا لِّتَسْكُنُوا إِلَيْهَا وَجَعَلَ بَيْنَكُم مَّوَدَّةً وَرَحْمَةً ۚ';
 
 interface QrCardBackgroundProps {
   children: React.ReactNode;
@@ -39,5 +41,5 @@ export const QrCardBackground: React.FC<QrCardBackgroundProps> = ({
   );
 };
 
-export { backgroundCardUrl, koraanVerseUrl };
+export { backgroundCardUrl };
 

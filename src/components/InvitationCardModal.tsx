@@ -6,7 +6,7 @@ import { useLanguage } from '../contexts/LanguageContext';
 import { buildWhatsAppMessage } from '../utils/helpers';
 import { Download, Share2, MessageCircle, Copy, Check, X, ShieldAlert, Sparkles, RotateCcw } from 'lucide-react';
 import { ResetTestModal } from './ResetTestModal';
-import { QrCardBackground, backgroundCardUrl, koraanVerseUrl } from './QrCardBackground';
+import { QrCardBackground, backgroundCardUrl, QURAN_VERSE_TEXT } from './QrCardBackground';
 
 interface InvitationCardModalProps {
   guest: Guest;
@@ -111,8 +111,8 @@ export const InvitationCardModal: React.FC<InvitationCardModalProps> = ({
         img.src = src;
       });
 
-    Promise.all([loadImage(backgroundCardUrl), loadImage(koraanVerseUrl), loadImage(qrDataUrl)])
-      .then(([bgImg, verseImg, qrImg]) => {
+    Promise.all([loadImage(backgroundCardUrl), loadImage(qrDataUrl)])
+      .then(([bgImg, qrImg]) => {
         if (cancelled) return;
 
         // High resolution card: 1080 x 1500 px
@@ -203,16 +203,13 @@ export const InvitationCardModal: React.FC<InvitationCardModalProps> = ({
         drawCornerFlourish(58, 1442, 1, -1);
         drawCornerFlourish(1022, 1442, -1, -1);
 
-        // 3. Header: Quran Verse Calligraphy Image (وجعل بينكم مودة ورحمة)
-        const verseMaxWidth = 340;
-        const verseRatio = verseImg.width / verseImg.height;
-        const verseWidth = verseMaxWidth;
-        const verseHeight = verseWidth / verseRatio;
-        const verseX = (cardW - verseWidth) / 2;
-        const verseY = 74;
-        ctx.drawImage(verseImg, verseX, verseY, verseWidth, verseHeight);
+        // 3. Header: Quran Verse in Calligraphy styling
+        ctx.fillStyle = PALETTE.burgundy;
+        ctx.font = 'bold 28px Amiri, Cairo, serif';
         ctx.textAlign = 'center';
         ctx.direction = 'rtl';
+        ctx.fillText('وَمِنْ آيَاتِهِ أَنْ خَلَقَ لَكُم مِّنْ أَنفُسِكُمْ أَزْوَاجًا', 540, 130);
+        ctx.fillText('لِّتَسْكُنُوا إِلَيْهَا وَجَعَلَ بَيْنَكُم مَّوَدَّةً وَرَحْمَةً ۚ', 540, 172);
 
         // Arabesque Botanical Center Divider (Olive Leaves + Burgundy Diamond)
         ctx.save();
@@ -521,12 +518,8 @@ export const InvitationCardModal: React.FC<InvitationCardModalProps> = ({
             innerClassName="border border-olive-600/50 rounded-lg p-4"
             dir="rtl"
           >
-            <div className="flex justify-center mb-2">
-              <img
-                src={koraanVerseUrl}
-                alt="وجعل بينكم مودة ورحمة"
-                className="h-12 sm:h-14 w-auto object-contain"
-              />
+            <div className="text-burgundy-900 font-arabic text-xs sm:text-sm font-bold leading-relaxed mb-2 px-1">
+              {QURAN_VERSE_TEXT}
             </div>
 
             {/* Guest Honor Box */}
