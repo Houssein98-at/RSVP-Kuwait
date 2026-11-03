@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { useParams, Link } from 'react-router-dom';
+import { useParams } from 'react-router-dom';
 import QRCode from 'qrcode';
 import { EVENT_DETAILS } from '../utils/constants';
 import { validateToken } from '../services/firestore';
@@ -66,19 +66,6 @@ export const PublicInvitationPage: React.FC = () => {
 
   return (
     <div className="min-h-screen bg-arabesque-subtle flex flex-col justify-between p-4 sm:p-6 text-charcoal-800">
-      {/* Top Bar with Admin Portal Link */}
-      <div className="max-w-md w-full mx-auto flex justify-between items-center text-xs text-charcoal-600">
-        <span className="font-semibold text-burgundy-800">
-          {EVENT_DETAILS.titleAr}
-        </span>
-        <Link
-          to="/"
-          className="text-burgundy-700 hover:text-burgundy-900 underline text-[11px] font-medium"
-        >
-          بوابة الإدارة
-        </Link>
-      </div>
-
       {/* Luxury Digital Pass */}
       <div className="max-w-md w-full mx-auto my-auto animate-fade-in">
         <QrCardBackground
