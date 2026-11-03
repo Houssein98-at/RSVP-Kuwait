@@ -1,0 +1,45 @@
+import React from 'react';
+import backgroundCardUrl from '../assets/background_card.jpg';
+
+interface QrCardBackgroundProps {
+  children: React.ReactNode;
+  className?: string;
+  innerClassName?: string;
+  dir?: 'rtl' | 'ltr';
+}
+
+/**
+ * Reusable background wrapper for all QR code cards across the application.
+ * Displays the `background_card.jpg` asset with `object-cover` / `bg-cover`
+ * positioning so it never stretches, distorts, or crops awkwardly across screen sizes,
+ * while preserving consistent border styling and contrast for inner content and QR codes.
+ */
+export const QrCardBackground: React.FC<QrCardBackgroundProps> = ({
+  children,
+  className = '',
+  innerClassName = '',
+  dir,
+}) => {
+  return (
+    <div
+      className={`relative overflow-hidden bg-cover bg-center bg-no-repeat shadow-luxury text-center ${className}`}
+      style={{
+        backgroundImage: `url(${backgroundCardUrl})`,
+      }}
+    >
+      {/* Subtle warm veil to ensure crisp legibility across the watercolor texture */}
+      <div className="absolute inset-0 bg-warmwhite/20 pointer-events-none" />
+
+      {/* Ornate Inner Frame */}
+      <div
+        className={`relative z-10 ${innerClassName}`}
+        dir={dir}
+      >
+        {children}
+      </div>
+    </div>
+  );
+};
+
+export { backgroundCardUrl };
+

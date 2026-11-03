@@ -6,6 +6,7 @@ import { useLanguage } from '../contexts/LanguageContext';
 import { buildWhatsAppMessage } from '../utils/helpers';
 import { Download, Share2, MessageCircle, Copy, Check, X, ShieldAlert, Sparkles, RotateCcw } from 'lucide-react';
 import { ResetTestModal } from './ResetTestModal';
+import { QrCardBackground, backgroundCardUrl } from './QrCardBackground';
 
 interface InvitationCardModalProps {
   guest: Guest;
@@ -99,293 +100,315 @@ export const InvitationCardModal: React.FC<InvitationCardModalProps> = ({
     const ctx = canvas.getContext('2d');
     if (!ctx) return;
 
-    // High resolution card: 1080 x 1500 px
-    canvas.width = 1080;
-    canvas.height = 1500;
+    let cancelled = false;
 
-    // 1. Background: Warm Luxury Parchment Gradient (Warm White & Beige)
-    const bgGradient = ctx.createLinearGradient(0, 0, 1080, 1500);
-    bgGradient.addColorStop(0, '#FAF8F4');
-    bgGradient.addColorStop(0.3, '#EDE1CF');
-    bgGradient.addColorStop(0.7, '#F5EFE5');
-    bgGradient.addColorStop(1, '#EDE1CF');
-    ctx.fillStyle = bgGradient;
-    ctx.fillRect(0, 0, 1080, 1500);
-
-    // Subtle arabesque diagonal texture lines
-    ctx.save();
-    ctx.strokeStyle = 'rgba(107, 35, 55, 0.025)';
-    ctx.lineWidth = 1;
-    for (let i = -1500; i < 2500; i += 40) {
-      ctx.beginPath();
-      ctx.moveTo(i, 0);
-      ctx.lineTo(i + 1500, 1500);
-      ctx.stroke();
-    }
-    ctx.restore();
-
-    // 2. Ornate Outer Burgundy Border
-    ctx.strokeStyle = PALETTE.burgundy;
-    ctx.lineWidth = 7;
-    ctx.strokeRect(44, 44, 992, 1412);
-
-    // Secondary Delicate Olive Green Border
-    ctx.strokeStyle = PALETTE.olive;
-    ctx.lineWidth = 2;
-    ctx.strokeRect(58, 58, 964, 1384);
-
-    // Delicate inner dotted Burgundy guideline
-    ctx.save();
-    ctx.strokeStyle = 'rgba(107, 35, 55, 0.35)';
-    ctx.lineWidth = 1.2;
-    ctx.setLineDash([4, 4]);
-    ctx.strokeRect(68, 68, 944, 1364);
-    ctx.restore();
-
-    // Helper: Draw decorative Arabesque / Floral corner flourishes
-    const drawCornerFlourish = (cx: number, cy: number, flipX: number, flipY: number) => {
-      ctx.save();
-      ctx.translate(cx, cy);
-      ctx.scale(flipX, flipY);
-
-      // Central corner diamond in Burgundy
-      ctx.fillStyle = PALETTE.burgundy;
-      ctx.beginPath();
-      ctx.moveTo(0, -12);
-      ctx.lineTo(12, 0);
-      ctx.lineTo(0, 12);
-      ctx.lineTo(-12, 0);
-      ctx.closePath();
-      ctx.fill();
-
-      // Flanking olive petals
-      ctx.fillStyle = PALETTE.olive;
-      ctx.beginPath();
-      ctx.ellipse(18, 0, 6, 3, 0, 0, Math.PI * 2);
-      ctx.fill();
-      ctx.beginPath();
-      ctx.ellipse(0, 18, 3, 6, 0, 0, Math.PI * 2);
-      ctx.fill();
-
-      // Filigree arc
-      ctx.strokeStyle = PALETTE.olive;
-      ctx.lineWidth = 2;
-      ctx.beginPath();
-      ctx.arc(0, 0, 28, 0, Math.PI / 2);
-      ctx.stroke();
-
-      // Outer accent bead
-      ctx.fillStyle = PALETTE.burgundy;
-      ctx.beginPath();
-      ctx.arc(28, 28, 4, 0, Math.PI * 2);
-      ctx.fill();
-
-      ctx.restore();
-    };
-
-    drawCornerFlourish(58, 58, 1, 1);
-    drawCornerFlourish(1022, 58, -1, 1);
-    drawCornerFlourish(58, 1442, 1, -1);
-    drawCornerFlourish(1022, 1442, -1, -1);
-
-    // 3. Header: Bismillah in Calligraphy styling
-    ctx.fillStyle = PALETTE.burgundy;
-    ctx.font = 'bold 36px Amiri, Cairo, serif';
-    ctx.textAlign = 'center';
-    ctx.direction = 'rtl';
-    ctx.fillText('بِسْمِ اللَّهِ الرَّحْمَٰنِ الرَّحِيمِ', 540, 150);
-
-    // Arabesque Botanical Center Divider (Olive Leaves + Burgundy Diamond)
-    ctx.save();
-    // Horizontal divider lines
-    ctx.strokeStyle = 'rgba(107, 35, 55, 0.4)';
-    ctx.lineWidth = 1.5;
-    ctx.beginPath();
-    ctx.moveTo(340, 185);
-    ctx.lineTo(495, 185);
-    ctx.moveTo(585, 185);
-    ctx.lineTo(740, 185);
-    ctx.stroke();
-
-    // Center burgundy diamond
-    ctx.fillStyle = PALETTE.burgundy;
-    ctx.beginPath();
-    ctx.moveTo(540, 177);
-    ctx.lineTo(548, 185);
-    ctx.lineTo(540, 193);
-    ctx.lineTo(532, 185);
-    ctx.closePath();
-    ctx.fill();
-
-    // Two olive leaf accents
-    ctx.fillStyle = PALETTE.olive;
-    ctx.beginPath();
-    ctx.ellipse(516, 185, 8, 3.5, 0, 0, Math.PI * 2);
-    ctx.fill();
-    ctx.beginPath();
-    ctx.ellipse(564, 185, 8, 3.5, 0, 0, Math.PI * 2);
-    ctx.fill();
-    ctx.restore();
-
-    // 4. Guest Honorific Banner & Name Box
-    ctx.fillStyle = PALETTE.olive;
-    ctx.font = '500 28px Cairo, sans-serif';
-    ctx.fillText('نتشرّف بدعوة الكريمة:', 540, 235);
-
-    // Guest Name in elegant luxury box
-    const guestBoxWidth = 840;
-    const guestBoxX = (1080 - guestBoxWidth) / 2;
-    const guestBoxY = 260;
-    const guestBoxHeight = 92;
-
-    // Fill Warm White background
-    ctx.fillStyle = PALETTE.warmWhite;
-    ctx.fillRect(guestBoxX, guestBoxY, guestBoxWidth, guestBoxHeight);
-
-    // Outer Burgundy border
-    ctx.strokeStyle = PALETTE.burgundy;
-    ctx.lineWidth = 2;
-    ctx.strokeRect(guestBoxX, guestBoxY, guestBoxWidth, guestBoxHeight);
-
-    // Inner Olive fine border
-    ctx.strokeStyle = PALETTE.olive;
-    ctx.lineWidth = 1;
-    ctx.strokeRect(guestBoxX + 4, guestBoxY + 4, guestBoxWidth - 8, guestBoxHeight - 8);
-
-    // Corner decorative notches on guest box
-    ctx.fillStyle = PALETTE.burgundy;
-    ctx.fillRect(guestBoxX - 3, guestBoxY - 3, 6, 6);
-    ctx.fillRect(guestBoxX + guestBoxWidth - 3, guestBoxY - 3, 6, 6);
-    ctx.fillRect(guestBoxX - 3, guestBoxY + guestBoxHeight - 3, 6, 6);
-    ctx.fillRect(guestBoxX + guestBoxWidth - 3, guestBoxY + guestBoxHeight - 3, 6, 6);
-
-    // Guest Name
-    ctx.fillStyle = PALETTE.burgundy;
-    ctx.font = 'bold 42px Amiri, Cairo, serif';
-    ctx.fillText(guest.guestName, 540, 322);
-
-    // 5. Ceremony Header in Olive Green
-    ctx.fillStyle = PALETTE.olive;
-    ctx.font = '600 32px Amiri, Cairo, sans-serif';
-    ctx.fillText('لحضور حفل عقد قران:', 540, 405);
-
-    // 6. Couple Names in Majestic Burgundy
-    ctx.fillStyle = PALETTE.burgundy;
-    ctx.font = 'bold 66px Amiri, Playfair Display, serif';
-    ctx.fillText('ساره وعبدالله', 540, 485);
-
-    // 7. Date & Time
-    ctx.fillStyle = PALETTE.charcoal;
-    ctx.font = 'bold 28px Cairo, Tajawal, sans-serif';
-    ctx.fillText('الثلاثاء ٢٩ ديسمبر ٢٠٢٦', 540, 555);
-
-    ctx.fillStyle = PALETTE.burgundy;
-    ctx.font = '600 24px Cairo, Tajawal, sans-serif';
-    ctx.fillText('الساعة ٧:٠٠ مساءً', 540, 595);
-
-    // 8. Venue (Arabic in Olive & English in Dark Charcoal)
-    ctx.fillStyle = PALETTE.olive;
-    ctx.font = '600 26px Cairo, sans-serif';
-    ctx.fillText('النرجس — فندق والدورف أستوريا، الكويت', 540, 650);
-
-    ctx.fillStyle = PALETTE.charcoalMuted;
-    ctx.font = 'bold 19px Outfit, sans-serif';
-    ctx.direction = 'ltr';
-    ctx.fillText('AL NARJIS — WALDORF ASTORIA, KUWAIT', 540, 685);
-    ctx.direction = 'rtl';
-
-    // Thin separator line
-    ctx.strokeStyle = 'rgba(102, 112, 68, 0.45)';
-    ctx.lineWidth = 1.2;
-    ctx.beginPath();
-    ctx.moveTo(260, 725);
-    ctx.lineTo(820, 725);
-    ctx.stroke();
-
-    // 9. QR Code Image centered
-    const qrImg = new Image();
-    qrImg.onload = () => {
-      const qrSize = 380;
-      const qrBoxSize = 424;
-      const qrBoxX = (1080 - qrBoxSize) / 2;
-      const qrBoxY = 760;
-      const qrX = (1080 - qrSize) / 2;
-      const qrY = qrBoxY + (qrBoxSize - qrSize) / 2;
-
-      // Solid light container for pristine quiet zone
-      ctx.fillStyle = PALETTE.warmWhite;
-      ctx.fillRect(qrBoxX, qrBoxY, qrBoxSize, qrBoxSize);
-
-      // Frame: Outer Burgundy
-      ctx.strokeStyle = PALETTE.burgundy;
-      ctx.lineWidth = 2.5;
-      ctx.strokeRect(qrBoxX, qrBoxY, qrBoxSize, qrBoxSize);
-
-      // Frame: Inner Olive
-      ctx.strokeStyle = PALETTE.olive;
-      ctx.lineWidth = 1;
-      ctx.strokeRect(qrBoxX + 6, qrBoxY + 6, qrBoxSize - 12, qrBoxSize - 12);
-
-      // Corner accent diamonds on QR frame
-      const qrCorners = [
-        [qrBoxX, qrBoxY],
-        [qrBoxX + qrBoxSize, qrBoxY],
-        [qrBoxX, qrBoxY + qrBoxSize],
-        [qrBoxX + qrBoxSize, qrBoxY + qrBoxSize],
-      ];
-      qrCorners.forEach(([cx, cy]) => {
-        ctx.fillStyle = PALETTE.olive;
-        ctx.beginPath();
-        ctx.arc(cx, cy, 5, 0, Math.PI * 2);
-        ctx.fill();
+    const loadImage = (src: string): Promise<HTMLImageElement> =>
+      new Promise((resolve, reject) => {
+        const img = new Image();
+        img.crossOrigin = 'anonymous';
+        img.onload = () => resolve(img);
+        img.onerror = reject;
+        img.src = src;
       });
 
-      // Draw high-contrast QR code
-      ctx.drawImage(qrImg, qrX, qrY, qrSize, qrSize);
+    Promise.all([loadImage(backgroundCardUrl), loadImage(qrDataUrl)])
+      .then(([bgImg, qrImg]) => {
+        if (cancelled) return;
 
-      // 10. Footer Notice
-      ctx.fillStyle = PALETTE.burgundy;
-      ctx.font = 'bold 24px Cairo, sans-serif';
-      ctx.fillText('يرجى إبراز رمز الدعوة عند الدخول — الدعوة شخصية', 540, 1245);
+        // High resolution card: 1080 x 1500 px
+        const cardW = 1080;
+        const cardH = 1500;
+        canvas.width = cardW;
+        canvas.height = cardH;
 
-      ctx.fillStyle = PALETTE.olive;
-      ctx.font = '600 18px Outfit, sans-serif';
-      ctx.direction = 'ltr';
-      ctx.fillText(`TOKEN: ${invitationToken}`, 540, 1285);
+        // 1. Background: Draw background_card asset with aspect-fill (cover) without stretching
+        const imgRatio = bgImg.width / bgImg.height;
+        const canvasRatio = cardW / cardH;
+        let sx = 0;
+        let sy = 0;
+        let sw = bgImg.width;
+        let sh = bgImg.height;
 
-      // Bottom center flourish
-      ctx.fillStyle = PALETTE.burgundy;
-      ctx.beginPath();
-      ctx.arc(540, 1325, 4, 0, Math.PI * 2);
-      ctx.fill();
+        if (imgRatio > canvasRatio) {
+          sw = bgImg.height * canvasRatio;
+          sx = (bgImg.width - sw) / 2;
+        } else {
+          sh = bgImg.width / canvasRatio;
+          sy = (bgImg.height - sh) / 2;
+        }
 
-      ctx.fillStyle = PALETTE.olive;
-      ctx.beginPath();
-      ctx.ellipse(522, 1325, 7, 3, 0, 0, Math.PI * 2);
-      ctx.fill();
-      ctx.beginPath();
-      ctx.ellipse(558, 1325, 7, 3, 0, 0, Math.PI * 2);
-      ctx.fill();
+        ctx.drawImage(bgImg, sx, sy, sw, sh, 0, 0, cardW, cardH);
 
-      // 11. Subtle & Elegant Powered by MeetHub credit on downloadable invitation
-      ctx.save();
-      ctx.fillStyle = 'rgba(107, 35, 55, 0.45)';
-      ctx.font = '500 15px Outfit, sans-serif';
-      ctx.textAlign = 'center';
-      ctx.direction = 'ltr';
-      ctx.fillText('POWERED BY MEETHUB', 540, 1370);
-      ctx.restore();
+        // Subtle warm veil for optimal text contrast over the watercolor texture
+        ctx.fillStyle = 'rgba(250, 248, 244, 0.18)';
+        ctx.fillRect(0, 0, cardW, cardH);
 
-      // Generate Downloadable PNG Data URL
-      try {
-        const dataUrl = canvas.toDataURL('image/png');
-        setDownloadUrl(dataUrl);
-      } catch (e) {
-        console.warn('Canvas export notice:', e);
-      }
+        // 2. Ornate Outer Burgundy Border
+        ctx.strokeStyle = PALETTE.burgundy;
+        ctx.lineWidth = 7;
+        ctx.strokeRect(44, 44, 992, 1412);
+
+        // Secondary Delicate Olive Green Border
+        ctx.strokeStyle = PALETTE.olive;
+        ctx.lineWidth = 2;
+        ctx.strokeRect(58, 58, 964, 1384);
+
+        // Delicate inner dotted Burgundy guideline
+        ctx.save();
+        ctx.strokeStyle = 'rgba(107, 35, 55, 0.35)';
+        ctx.lineWidth = 1.2;
+        ctx.setLineDash([4, 4]);
+        ctx.strokeRect(68, 68, 944, 1364);
+        ctx.restore();
+
+        // Helper: Draw decorative Arabesque / Floral corner flourishes
+        const drawCornerFlourish = (cx: number, cy: number, flipX: number, flipY: number) => {
+          ctx.save();
+          ctx.translate(cx, cy);
+          ctx.scale(flipX, flipY);
+
+          // Central corner diamond in Burgundy
+          ctx.fillStyle = PALETTE.burgundy;
+          ctx.beginPath();
+          ctx.moveTo(0, -12);
+          ctx.lineTo(12, 0);
+          ctx.lineTo(0, 12);
+          ctx.lineTo(-12, 0);
+          ctx.closePath();
+          ctx.fill();
+
+          // Flanking olive petals
+          ctx.fillStyle = PALETTE.olive;
+          ctx.beginPath();
+          ctx.ellipse(18, 0, 6, 3, 0, 0, Math.PI * 2);
+          ctx.fill();
+          ctx.beginPath();
+          ctx.ellipse(0, 18, 3, 6, 0, 0, Math.PI * 2);
+          ctx.fill();
+
+          // Filigree arc
+          ctx.strokeStyle = PALETTE.olive;
+          ctx.lineWidth = 2;
+          ctx.beginPath();
+          ctx.arc(0, 0, 28, 0, Math.PI / 2);
+          ctx.stroke();
+
+          // Outer accent bead
+          ctx.fillStyle = PALETTE.burgundy;
+          ctx.beginPath();
+          ctx.arc(28, 28, 4, 0, Math.PI * 2);
+          ctx.fill();
+
+          ctx.restore();
+        };
+
+        drawCornerFlourish(58, 58, 1, 1);
+        drawCornerFlourish(1022, 58, -1, 1);
+        drawCornerFlourish(58, 1442, 1, -1);
+        drawCornerFlourish(1022, 1442, -1, -1);
+
+        // 3. Header: Bismillah in Calligraphy styling
+        ctx.fillStyle = PALETTE.burgundy;
+        ctx.font = 'bold 36px Amiri, Cairo, serif';
+        ctx.textAlign = 'center';
+        ctx.direction = 'rtl';
+        ctx.fillText('بِسْمِ اللَّهِ الرَّحْمَٰنِ الرَّحِيمِ', 540, 150);
+
+        // Arabesque Botanical Center Divider (Olive Leaves + Burgundy Diamond)
+        ctx.save();
+        // Horizontal divider lines
+        ctx.strokeStyle = 'rgba(107, 35, 55, 0.4)';
+        ctx.lineWidth = 1.5;
+        ctx.beginPath();
+        ctx.moveTo(340, 185);
+        ctx.lineTo(495, 185);
+        ctx.moveTo(585, 185);
+        ctx.lineTo(740, 185);
+        ctx.stroke();
+
+        // Center burgundy diamond
+        ctx.fillStyle = PALETTE.burgundy;
+        ctx.beginPath();
+        ctx.moveTo(540, 177);
+        ctx.lineTo(548, 185);
+        ctx.lineTo(540, 193);
+        ctx.lineTo(532, 185);
+        ctx.closePath();
+        ctx.fill();
+
+        // Two olive leaf accents
+        ctx.fillStyle = PALETTE.olive;
+        ctx.beginPath();
+        ctx.ellipse(516, 185, 8, 3.5, 0, 0, Math.PI * 2);
+        ctx.fill();
+        ctx.beginPath();
+        ctx.ellipse(564, 185, 8, 3.5, 0, 0, Math.PI * 2);
+        ctx.fill();
+        ctx.restore();
+
+        // 4. Guest Honorific Banner & Name Box
+        ctx.fillStyle = PALETTE.olive;
+        ctx.font = '500 28px Cairo, sans-serif';
+        ctx.fillText('نتشرّف بدعوة الكريمة:', 540, 235);
+
+        // Guest Name in elegant luxury box
+        const guestBoxWidth = 840;
+        const guestBoxX = (1080 - guestBoxWidth) / 2;
+        const guestBoxY = 260;
+        const guestBoxHeight = 92;
+
+        // Fill Warm White background
+        ctx.fillStyle = PALETTE.warmWhite;
+        ctx.fillRect(guestBoxX, guestBoxY, guestBoxWidth, guestBoxHeight);
+
+        // Outer Burgundy border
+        ctx.strokeStyle = PALETTE.burgundy;
+        ctx.lineWidth = 2;
+        ctx.strokeRect(guestBoxX, guestBoxY, guestBoxWidth, guestBoxHeight);
+
+        // Inner Olive fine border
+        ctx.strokeStyle = PALETTE.olive;
+        ctx.lineWidth = 1;
+        ctx.strokeRect(guestBoxX + 4, guestBoxY + 4, guestBoxWidth - 8, guestBoxHeight - 8);
+
+        // Corner decorative notches on guest box
+        ctx.fillStyle = PALETTE.burgundy;
+        ctx.fillRect(guestBoxX - 3, guestBoxY - 3, 6, 6);
+        ctx.fillRect(guestBoxX + guestBoxWidth - 3, guestBoxY - 3, 6, 6);
+        ctx.fillRect(guestBoxX - 3, guestBoxY + guestBoxHeight - 3, 6, 6);
+        ctx.fillRect(guestBoxX + guestBoxWidth - 3, guestBoxY + guestBoxHeight - 3, 6, 6);
+
+        // Guest Name
+        ctx.fillStyle = PALETTE.burgundy;
+        ctx.font = 'bold 42px Amiri, Cairo, serif';
+        ctx.fillText(currentGuest.guestName, 540, 322);
+
+        // 5. Ceremony Header in Olive Green
+        ctx.fillStyle = PALETTE.olive;
+        ctx.font = '600 32px Amiri, Cairo, sans-serif';
+        ctx.fillText('لحضور حفل عقد قران:', 540, 405);
+
+        // 6. Couple Names in Majestic Burgundy
+        ctx.fillStyle = PALETTE.burgundy;
+        ctx.font = 'bold 66px Amiri, Playfair Display, serif';
+        ctx.fillText('ساره وعبدالله', 540, 485);
+
+        // 7. Date & Time
+        ctx.fillStyle = PALETTE.charcoal;
+        ctx.font = 'bold 28px Cairo, Tajawal, sans-serif';
+        ctx.fillText('الثلاثاء ٢٩ ديسمبر ٢٠٢٦', 540, 555);
+
+        ctx.fillStyle = PALETTE.burgundy;
+        ctx.font = '600 24px Cairo, Tajawal, sans-serif';
+        ctx.fillText('الساعة ٧:٠٠ مساءً', 540, 595);
+
+        // 8. Venue (Arabic in Olive & English in Dark Charcoal)
+        ctx.fillStyle = PALETTE.olive;
+        ctx.font = '600 26px Cairo, sans-serif';
+        ctx.fillText('النرجس — فندق والدورف أستوريا، الكويت', 540, 650);
+
+        ctx.fillStyle = PALETTE.charcoalMuted;
+        ctx.font = 'bold 19px Outfit, sans-serif';
+        ctx.direction = 'ltr';
+        ctx.fillText('AL NARJIS — WALDORF ASTORIA, KUWAIT', 540, 685);
+        ctx.direction = 'rtl';
+
+        // Thin separator line
+        ctx.strokeStyle = 'rgba(102, 112, 68, 0.45)';
+        ctx.lineWidth = 1.2;
+        ctx.beginPath();
+        ctx.moveTo(260, 725);
+        ctx.lineTo(820, 725);
+        ctx.stroke();
+
+        // 9. QR Code Image centered
+        const qrSize = 380;
+        const qrBoxSize = 424;
+        const qrBoxX = (1080 - qrBoxSize) / 2;
+        const qrBoxY = 760;
+        const qrX = (1080 - qrSize) / 2;
+        const qrY = qrBoxY + (qrBoxSize - qrSize) / 2;
+
+        // Solid light container for pristine quiet zone
+        ctx.fillStyle = PALETTE.warmWhite;
+        ctx.fillRect(qrBoxX, qrBoxY, qrBoxSize, qrBoxSize);
+
+        // Frame: Outer Burgundy
+        ctx.strokeStyle = PALETTE.burgundy;
+        ctx.lineWidth = 2.5;
+        ctx.strokeRect(qrBoxX, qrBoxY, qrBoxSize, qrBoxSize);
+
+        // Frame: Inner Olive
+        ctx.strokeStyle = PALETTE.olive;
+        ctx.lineWidth = 1;
+        ctx.strokeRect(qrBoxX + 6, qrBoxY + 6, qrBoxSize - 12, qrBoxSize - 12);
+
+        // Corner accent diamonds on QR frame
+        const qrCorners = [
+          [qrBoxX, qrBoxY],
+          [qrBoxX + qrBoxSize, qrBoxY],
+          [qrBoxX, qrBoxY + qrBoxSize],
+          [qrBoxX + qrBoxSize, qrBoxY + qrBoxSize],
+        ];
+        qrCorners.forEach(([cx, cy]) => {
+          ctx.fillStyle = PALETTE.olive;
+          ctx.beginPath();
+          ctx.arc(cx, cy, 5, 0, Math.PI * 2);
+          ctx.fill();
+        });
+
+        // Draw high-contrast QR code
+        ctx.drawImage(qrImg, qrX, qrY, qrSize, qrSize);
+
+        // 10. Footer Notice
+        ctx.fillStyle = PALETTE.burgundy;
+        ctx.font = 'bold 24px Cairo, sans-serif';
+        ctx.fillText('يرجى إبراز رمز الدعوة عند الدخول — الدعوة شخصية', 540, 1245);
+
+        ctx.fillStyle = PALETTE.olive;
+        ctx.font = '600 18px Outfit, sans-serif';
+        ctx.direction = 'ltr';
+        ctx.fillText(`TOKEN: ${invitationToken}`, 540, 1285);
+
+        // Bottom center flourish
+        ctx.fillStyle = PALETTE.burgundy;
+        ctx.beginPath();
+        ctx.arc(540, 1325, 4, 0, Math.PI * 2);
+        ctx.fill();
+
+        ctx.fillStyle = PALETTE.olive;
+        ctx.beginPath();
+        ctx.ellipse(522, 1325, 7, 3, 0, 0, Math.PI * 2);
+        ctx.fill();
+        ctx.beginPath();
+        ctx.ellipse(558, 1325, 7, 3, 0, 0, Math.PI * 2);
+        ctx.fill();
+
+        // 11. Subtle & Elegant Powered by MeetHub credit on downloadable invitation
+        ctx.save();
+        ctx.fillStyle = 'rgba(107, 35, 55, 0.55)';
+        ctx.font = '500 15px Outfit, sans-serif';
+        ctx.textAlign = 'center';
+        ctx.direction = 'ltr';
+        ctx.fillText('POWERED BY MEETHUB', 540, 1370);
+        ctx.restore();
+
+        // Generate Downloadable PNG Data URL
+        try {
+          const dataUrl = canvas.toDataURL('image/png');
+          setDownloadUrl(dataUrl);
+        } catch (e) {
+          console.warn('Canvas export notice:', e);
+        }
+      })
+      .catch((err) => {
+        console.error('Error rendering canvas:', err);
+      });
+
+    return () => {
+      cancelled = true;
     };
-    qrImg.src = qrDataUrl;
-  }, [qrDataUrl, guest.guestName, invitationToken]);
+  }, [qrDataUrl, currentGuest.guestName, invitationToken]);
 
   // Handle PNG Download
   const handleDownload = () => {
@@ -497,75 +520,76 @@ export const InvitationCardModal: React.FC<InvitationCardModalProps> = ({
           </div>
 
           {/* Invitation Card Visual Representation */}
-          <div className="relative w-full max-w-[380px] bg-gradient-to-b from-warmwhite via-beige-50 to-beige-100 rounded-xl border-2 border-burgundy-600/70 p-5 shadow-luxury text-center my-2">
-            {/* Ornate Inner Frame */}
-            <div className="border border-olive-600/50 rounded-lg p-4 relative bg-warmwhite/60" dir="rtl">
-              <div className="text-burgundy-900 font-arabic text-xs font-semibold mb-2">
-                بِسْمِ اللَّهِ الرَّحْمَٰنِ الرَّحِيمِ
-              </div>
+          <QrCardBackground
+            className="w-full max-w-[380px] rounded-xl border-2 border-burgundy-600/70 p-5 my-2"
+            innerClassName="border border-olive-600/50 rounded-lg p-4 bg-warmwhite/60"
+            dir="rtl"
+          >
+            <div className="text-burgundy-900 font-arabic text-xs font-semibold mb-2">
+              بِسْمِ اللَّهِ الرَّحْمَٰنِ الرَّحِيمِ
+            </div>
 
-              {/* Guest Honor Box */}
-              <div className="my-2.5 py-2 px-3 bg-warmwhite border border-burgundy-300/80 rounded-md shadow-xs">
-                <span className="text-[11px] text-olive-800 font-medium block">
-                  نتشرّف بدعوة الكريمة:
-                </span>
-                <span className="font-bold text-lg text-burgundy-900 block font-arabic mt-0.5">
-                  {guest.guestName}
-                </span>
-              </div>
+            {/* Guest Honor Box */}
+            <div className="my-2.5 py-2 px-3 bg-warmwhite border border-burgundy-300/80 rounded-md shadow-xs">
+              <span className="text-[11px] text-olive-800 font-medium block">
+                نتشرّف بدعوة الكريمة:
+              </span>
+              <span className="font-bold text-lg text-burgundy-900 block font-arabic mt-0.5">
+                {currentGuest.guestName}
+              </span>
+            </div>
 
-              <div className="text-olive-700 text-xs font-arabic mb-0.5">
-                لحضور حفل عقد قران:
-              </div>
-              <h2 className="font-arabic font-bold text-2xl text-burgundy-950 mb-1">
-                {EVENT_DETAILS.coupleNamesAr}
-              </h2>
+            <div className="text-olive-700 text-xs font-arabic mb-0.5">
+              لحضور حفل عقد قران:
+            </div>
+            <h2 className="font-arabic font-bold text-2xl text-burgundy-950 mb-1">
+              {EVENT_DETAILS.coupleNamesAr}
+            </h2>
 
-              <div className="text-xs text-charcoal-700 font-medium my-2">
-                <div>{EVENT_DETAILS.dateFormattedAr}</div>
-                <div className="text-burgundy-800 font-bold">الساعة {EVENT_DETAILS.timeFormattedAr}</div>
-                <div className="text-[11px] text-olive-800 font-semibold mt-1">
-                  {EVENT_DETAILS.venueAr} — {EVENT_DETAILS.hotelAr}
-                </div>
-              </div>
-
-              {/* QR Code Container */}
-              <div className="my-3 flex flex-col items-center justify-center">
-                {generating ? (
-                  <div className="w-44 h-44 bg-beige-200/60 rounded-lg flex items-center justify-center text-xs text-charcoal-500">
-                    جاري إعداد الرمز...
-                  </div>
-                ) : qrDataUrl ? (
-                  <div className="p-2.5 bg-warmwhite border border-burgundy-400/60 rounded-lg shadow-xs">
-                    <img src={qrDataUrl} alt="Invitation QR" className="w-40 h-40 object-contain" />
-                  </div>
-                ) : (
-                  <div className="w-44 h-44 bg-red-50 text-red-700 border border-red-200 rounded-lg flex items-center justify-center text-xs p-3">
-                    لم يتم توليد رمز لهذا الضيف بعد
-                  </div>
-                )}
-                <span className="text-[11px] text-burgundy-800 font-semibold mt-2">
-                  {t.cardNotice}
-                </span>
-                <span className="text-[9px] text-charcoal-400 font-mono mt-0.5">
-                  {invitationToken}
-                </span>
-
-                {/* Subtle MeetHub branding */}
-                <div className="mt-2 pt-2 border-t border-beige-200/60 flex items-center justify-center">
-                  <a
-                    href={MEETHUB_BRAND.instagramUrl}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="inline-flex items-center gap-1 text-[10px] text-charcoal-400 hover:text-burgundy-900 transition-colors"
-                  >
-                    <span>Powered by</span>
-                    <span className="font-bold text-burgundy-900">{MEETHUB_BRAND.name}</span>
-                  </a>
-                </div>
+            <div className="text-xs text-charcoal-700 font-medium my-2">
+              <div>{EVENT_DETAILS.dateFormattedAr}</div>
+              <div className="text-burgundy-800 font-bold">الساعة {EVENT_DETAILS.timeFormattedAr}</div>
+              <div className="text-[11px] text-olive-800 font-semibold mt-1">
+                {EVENT_DETAILS.venueAr} — {EVENT_DETAILS.hotelAr}
               </div>
             </div>
-          </div>
+
+            {/* QR Code Container */}
+            <div className="my-3 flex flex-col items-center justify-center">
+              {generating ? (
+                <div className="w-44 h-44 bg-beige-200/60 rounded-lg flex items-center justify-center text-xs text-charcoal-500">
+                  جاري إعداد الرمز...
+                </div>
+              ) : qrDataUrl ? (
+                <div className="p-2.5 bg-warmwhite border border-burgundy-400/60 rounded-lg shadow-xs">
+                  <img src={qrDataUrl} alt="Invitation QR" className="w-40 h-40 object-contain" />
+                </div>
+              ) : (
+                <div className="w-44 h-44 bg-red-50 text-red-700 border border-red-200 rounded-lg flex items-center justify-center text-xs p-3">
+                  لم يتم توليد رمز لهذا الضيف بعد
+                </div>
+              )}
+              <span className="text-[11px] text-burgundy-800 font-semibold mt-2">
+                {t.cardNotice}
+              </span>
+              <span className="text-[9px] text-charcoal-400 font-mono mt-0.5">
+                {invitationToken}
+              </span>
+
+              {/* Subtle MeetHub branding */}
+              <div className="mt-2 pt-2 border-t border-beige-200/60 flex items-center justify-center">
+                <a
+                  href={MEETHUB_BRAND.instagramUrl}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="inline-flex items-center gap-1 text-[10px] text-charcoal-500 hover:text-burgundy-900 transition-colors"
+                >
+                  <span>Powered by</span>
+                  <span className="font-bold text-burgundy-900">{MEETHUB_BRAND.name}</span>
+                </a>
+              </div>
+            </div>
+          </QrCardBackground>
 
           {/* Hidden Canvas used for generating the high-res 1080x1500 PNG download */}
           <canvas ref={canvasRef} className="hidden" />

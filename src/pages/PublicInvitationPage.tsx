@@ -5,6 +5,7 @@ import { EVENT_DETAILS } from '../utils/constants';
 import { validateToken } from '../services/firestore';
 import { Calendar, MapPin, Clock, ShieldCheck, Heart } from 'lucide-react';
 import { MeetHubFooter } from '../components/MeetHubFooter';
+import { QrCardBackground } from '../components/QrCardBackground';
 import { getEventCountdown, buildGoogleCalendarUrl } from '../utils/helpers';
 
 export const PublicInvitationPage: React.FC = () => {
@@ -80,125 +81,125 @@ export const PublicInvitationPage: React.FC = () => {
 
       {/* Luxury Digital Pass */}
       <div className="max-w-md w-full mx-auto my-auto animate-fade-in">
-        <div className="luxury-card rounded-3xl p-6 sm:p-8 shadow-luxury border-2 border-burgundy-500/40 bg-gradient-to-b from-warmwhite via-beige-50 to-beige-100 text-center relative overflow-hidden">
-          {/* Inner Ornate Frame */}
-          <div className="border border-burgundy-300/60 rounded-2xl p-5 relative">
-            {/* Calligraphy Bismillah */}
-            <p className="font-arabic text-sm text-burgundy-900 font-bold mb-2">
-              بِسْمِ اللَّهِ الرَّحْمَٰنِ الرَّحِيمِ
-            </p>
+        <QrCardBackground
+          className="luxury-card rounded-3xl p-6 sm:p-8 border-2 border-burgundy-500/40"
+          innerClassName="border border-burgundy-300/60 rounded-2xl p-5 bg-warmwhite/60"
+        >
+          {/* Calligraphy Bismillah */}
+          <p className="font-arabic text-sm text-burgundy-900 font-bold mb-2">
+            بِسْمِ اللَّهِ الرَّحْمَٰنِ الرَّحِيمِ
+          </p>
 
-            <div className="w-16 h-0.5 bg-gradient-to-r from-transparent via-burgundy-500 to-transparent mx-auto mb-3" />
+          <div className="w-16 h-0.5 bg-gradient-to-r from-transparent via-burgundy-500 to-transparent mx-auto mb-3" />
 
-            {/* Guest Name Honor Box */}
-            <div className="my-3 p-3 bg-warmwhite border border-burgundy-300/70 rounded-xl shadow-xs" dir="rtl">
-              <span className="text-[12px] text-olive-800 block font-medium">
-                نتشرّف بدعوة الكريمة:
-              </span>
-              <span className="text-xl font-bold font-arabic text-burgundy-900 block mt-1">
-                {loading ? '...' : guestName || 'الكريمة'}
-              </span>
-            </div>
-
-            <span className="text-xs text-olive-700 font-semibold block mt-3">
-              لحضور حفل عقد قران:
+          {/* Guest Name Honor Box */}
+          <div className="my-3 p-3 bg-warmwhite border border-burgundy-300/70 rounded-xl shadow-xs" dir="rtl">
+            <span className="text-[12px] text-olive-800 block font-medium">
+              نتشرّف بدعوة الكريمة:
             </span>
+            <span className="text-xl font-bold font-arabic text-burgundy-900 block mt-1">
+              {loading ? '...' : guestName || 'الكريمة'}
+            </span>
+          </div>
 
-            <h1 className="text-2xl sm:text-3xl font-bold font-arabic text-burgundy-950 mt-1 mb-2">
-              {EVENT_DETAILS.coupleNamesAr}
-            </h1>
+          <span className="text-xs text-olive-700 font-semibold block mt-3">
+            لحضور حفل عقد قران:
+          </span>
 
-            {/* Event Time & Location Details */}
-            <div className="space-y-1.5 text-xs text-charcoal-700 font-medium my-4 bg-warmwhite/80 p-3 rounded-xl border border-beige-300/80">
-              <div className="flex items-center justify-center gap-1.5 font-bold text-charcoal-900">
-                <Calendar className="w-3.5 h-3.5 text-olive-600" />
-                <span>{EVENT_DETAILS.dateFormattedAr}</span>
-              </div>
-              <div className="flex items-center justify-center gap-1.5 text-burgundy-800 font-semibold">
-                <Clock className="w-3.5 h-3.5 text-olive-600" />
-                <span>الساعة {EVENT_DETAILS.timeFormattedAr}</span>
-              </div>
-              <div className="flex items-center justify-center gap-1.5 text-charcoal-600 text-[11px]">
-                <MapPin className="w-3.5 h-3.5 text-olive-600" />
-                <span>{EVENT_DETAILS.venueAr} — {EVENT_DETAILS.hotelAr}، الكويت</span>
-              </div>
+          <h1 className="text-2xl sm:text-3xl font-bold font-arabic text-burgundy-950 mt-1 mb-2">
+            {EVENT_DETAILS.coupleNamesAr}
+          </h1>
+
+          {/* Event Time & Location Details */}
+          <div className="space-y-1.5 text-xs text-charcoal-700 font-medium my-4 bg-warmwhite/80 p-3 rounded-xl border border-beige-300/80">
+            <div className="flex items-center justify-center gap-1.5 font-bold text-charcoal-900">
+              <Calendar className="w-3.5 h-3.5 text-olive-600" />
+              <span>{EVENT_DETAILS.dateFormattedAr}</span>
             </div>
+            <div className="flex items-center justify-center gap-1.5 text-burgundy-800 font-semibold">
+              <Clock className="w-3.5 h-3.5 text-olive-600" />
+              <span>الساعة {EVENT_DETAILS.timeFormattedAr}</span>
+            </div>
+            <div className="flex items-center justify-center gap-1.5 text-charcoal-600 text-[11px]">
+              <MapPin className="w-3.5 h-3.5 text-olive-600" />
+              <span>{EVENT_DETAILS.venueAr} — {EVENT_DETAILS.hotelAr}، الكويت</span>
+            </div>
+          </div>
 
-            {/* Event Countdown Timer (Target: 29 December 2026 at 7:00 PM Kuwait Time) */}
-            <div
-              className="my-3 py-2 px-3 bg-warmwhite/90 border border-burgundy-200/90 rounded-xl text-center shadow-xs"
-              data-testid="event-countdown-timer"
+          {/* Event Countdown Timer (Target: 29 December 2026 at 7:00 PM Kuwait Time) */}
+          <div
+            className="my-3 py-2 px-3 bg-warmwhite/90 border border-burgundy-200/90 rounded-xl text-center shadow-xs"
+            data-testid="event-countdown-timer"
+          >
+            <span className="text-[11px] text-olive-800 font-semibold block mb-1">
+              العد التنازلي لموعد الحفل:
+            </span>
+            <div className="flex justify-center items-center gap-1.5 text-xs font-mono font-bold text-burgundy-900" dir="ltr">
+              <span className="bg-beige-100 px-1.5 py-0.5 rounded border border-beige-300">
+                {countdown.days} <span className="text-[10px] text-charcoal-500 font-sans">يوم</span>
+              </span>
+              <span>:</span>
+              <span className="bg-beige-100 px-1.5 py-0.5 rounded border border-beige-300">
+                {String(countdown.hours).padStart(2, '0')} <span className="text-[10px] text-charcoal-500 font-sans">س</span>
+              </span>
+              <span>:</span>
+              <span className="bg-beige-100 px-1.5 py-0.5 rounded border border-beige-300">
+                {String(countdown.minutes).padStart(2, '0')} <span className="text-[10px] text-charcoal-500 font-sans">د</span>
+              </span>
+              <span>:</span>
+              <span className="bg-beige-100 px-1.5 py-0.5 rounded border border-beige-300">
+                {String(countdown.seconds).padStart(2, '0')} <span className="text-[10px] text-charcoal-500 font-sans">ث</span>
+              </span>
+            </div>
+          </div>
+
+          {/* Calendar Integration */}
+          <div className="my-2.5 flex justify-center">
+            <a
+              href={buildGoogleCalendarUrl()}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="inline-flex items-center gap-1.5 text-[11px] text-burgundy-800 hover:text-burgundy-950 font-semibold py-1 px-3 rounded-xl border border-burgundy-300/80 bg-warmwhite hover:bg-beige-50 transition-colors shadow-2xs"
+              title="إضافة موعد الحفل إلى تقويم Google"
             >
-              <span className="text-[11px] text-olive-800 font-semibold block mb-1">
-                العد التنازلي لموعد الحفل:
-              </span>
-              <div className="flex justify-center items-center gap-1.5 text-xs font-mono font-bold text-burgundy-900" dir="ltr">
-                <span className="bg-beige-100 px-1.5 py-0.5 rounded border border-beige-300">
-                  {countdown.days} <span className="text-[10px] text-charcoal-500 font-sans">يوم</span>
-                </span>
-                <span>:</span>
-                <span className="bg-beige-100 px-1.5 py-0.5 rounded border border-beige-300">
-                  {String(countdown.hours).padStart(2, '0')} <span className="text-[10px] text-charcoal-500 font-sans">س</span>
-                </span>
-                <span>:</span>
-                <span className="bg-beige-100 px-1.5 py-0.5 rounded border border-beige-300">
-                  {String(countdown.minutes).padStart(2, '0')} <span className="text-[10px] text-charcoal-500 font-sans">د</span>
-                </span>
-                <span>:</span>
-                <span className="bg-beige-100 px-1.5 py-0.5 rounded border border-beige-300">
-                  {String(countdown.seconds).padStart(2, '0')} <span className="text-[10px] text-charcoal-500 font-sans">ث</span>
-                </span>
+              <Calendar className="w-3.5 h-3.5 text-olive-600" />
+              <span>إضافة إلى التقويم (Google Calendar)</span>
+            </a>
+          </div>
+
+          {/* QR Pass */}
+          <div className="my-4 flex flex-col items-center">
+            {qrDataUrl ? (
+              <div className="p-3 bg-warmwhite border-2 border-burgundy-500/40 rounded-2xl shadow-md">
+                <img src={qrDataUrl} alt="Invitation QR" className="w-48 h-48 object-contain" />
               </div>
-            </div>
-
-            {/* Calendar Integration */}
-            <div className="my-2.5 flex justify-center">
-              <a
-                href={buildGoogleCalendarUrl()}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="inline-flex items-center gap-1.5 text-[11px] text-burgundy-800 hover:text-burgundy-950 font-semibold py-1 px-3 rounded-xl border border-burgundy-300/80 bg-warmwhite hover:bg-beige-50 transition-colors shadow-2xs"
-                title="إضافة موعد الحفل إلى تقويم Google"
-              >
-                <Calendar className="w-3.5 h-3.5 text-olive-600" />
-                <span>إضافة إلى التقويم (Google Calendar)</span>
-              </a>
-            </div>
-
-            {/* QR Pass */}
-            <div className="my-4 flex flex-col items-center">
-              {qrDataUrl ? (
-                <div className="p-3 bg-warmwhite border-2 border-burgundy-500/40 rounded-2xl shadow-md">
-                  <img src={qrDataUrl} alt="Invitation QR" className="w-48 h-48 object-contain" />
-                </div>
-              ) : (
-                <div className="w-48 h-48 bg-beige-200 rounded-2xl flex items-center justify-center text-xs text-charcoal-500">
-                  جاري تحميل الرمز...
-                </div>
-              )}
-
-              <p className="text-xs font-bold text-burgundy-800 mt-3 flex items-center justify-center gap-1">
-                <ShieldCheck className="w-4 h-4 text-olive-600 inline" />
-                <span>يرجى إبراز هذا الرمز عند مدخل القاعة</span>
-              </p>
-
-              <span className="text-[10px] text-charcoal-400 font-mono mt-1">
-                {token}
-              </span>
-            </div>
-
-            {statusMessage && (
-              <div className="mt-3 p-2 bg-red-50 border border-red-200 text-red-800 rounded-lg text-xs font-semibold">
-                {statusMessage}
+            ) : (
+              <div className="w-48 h-48 bg-beige-200 rounded-2xl flex items-center justify-center text-xs text-charcoal-500">
+                جاري تحميل الرمز...
               </div>
             )}
 
-            <div className="mt-4 pt-3 border-t border-beige-300 text-[11px] text-charcoal-500 flex items-center justify-center gap-1">
-              <Heart className="w-3 h-3 text-burgundy-600 inline fill-burgundy-600" />
-              <span>حضوركم يشرفنا ويسعدنا — الدعوة شخصية</span>
-            </div>
+            <p className="text-xs font-bold text-burgundy-800 mt-3 flex items-center justify-center gap-1">
+              <ShieldCheck className="w-4 h-4 text-olive-600 inline" />
+              <span>يرجى إبراز هذا الرمز عند مدخل القاعة</span>
+            </p>
+
+            <span className="text-[10px] text-charcoal-400 font-mono mt-1">
+              {token}
+            </span>
           </div>
-        </div>
+
+          {statusMessage && (
+            <div className="mt-3 p-2 bg-red-50 border border-red-200 text-red-800 rounded-lg text-xs font-semibold">
+              {statusMessage}
+            </div>
+          )}
+
+          <div className="mt-4 pt-3 border-t border-beige-300 text-[11px] text-charcoal-600 flex items-center justify-center gap-1">
+            <Heart className="w-3 h-3 text-burgundy-600 inline fill-burgundy-600" />
+            <span>حضوركم يشرفنا ويسعدنا — الدعوة شخصية</span>
+          </div>
+        </QrCardBackground>
       </div>
 
       {/* Footer */}
