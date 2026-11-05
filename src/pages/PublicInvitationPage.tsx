@@ -141,7 +141,7 @@ export const PublicInvitationPage: React.FC = () => {
           </div>
 
           {/* Calendar Integration */}
-          <div className="my-2.5 flex justify-center">
+          {/* <div className="my-2.5 flex justify-center">
             <a
               href={buildGoogleCalendarUrl()}
               target="_blank"
@@ -152,7 +152,7 @@ export const PublicInvitationPage: React.FC = () => {
               <Calendar className="w-3.5 h-3.5 text-olive-600" />
               <span>إضافة إلى التقويم (Google Calendar)</span>
             </a>
-          </div>
+          </div> */}
 
           {/* QR Pass */}
           <div className="my-4 flex flex-col items-center">
